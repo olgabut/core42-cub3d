@@ -1,0 +1,6 @@
+libft/libft.a
+*.o
+cub3d
+.vscode
+build/
+**/*a
