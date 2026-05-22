@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/20 09:48:26 by obutolin          #+#    #+#             */
-/*   Updated: 2026/05/22 12:02:12 by obutolin         ###   ########.fr       */
+/*   Created: 2026/05/22 10:35:37 by obutolin          #+#    #+#             */
+/*   Updated: 2026/05/22 12:15:06 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "checker.h"
 
-int	main(int argc, char **argv)
+int	check_file_extantion(char *fname)
 {
-	t_input			input;
-	t_memory_info	*memory;
+	int	len;
 
-	memory = NULL;
-	if (!parser(&input, argc - 1, argv, memory))
+	len = ft_strlen(fname);
+	if (fname[len - 4] == '.'
+		&& fname[len - 3] == 'c'
+		&& fname[len - 2] == 'u'
+		&& fname[len - 1] == 'b')
 		return (1);
-
-	// void	*mlx;
-	// void	*win;
-
-	// printf("prog = %s\n", argv[0]);
-	// if (argc > 1)
-	// 	printf("argv[1] = %s\n", argv[0]);
-
-	// mlx = mlx_init();
-	// if (!mlx)
-	// 	return (1);
-
-	// win = mlx_new_window(mlx, 800, 600, "MLX Test");
-	// if (!win)
-	// 	return (1);
-
-	// mlx_loop(mlx);
-	return (0);
+	return (print_invalid_file_extension(), 0);
 }
+
+int	check_argument(int arg_count)
+{
+	if (arg_count == 0)
+		return (print_no_argument(), 0);
+	if (arg_count > 1)
+		return (print_too_many_arguments(), 0);
+	return (1);
+}
+
+
