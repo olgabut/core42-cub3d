@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:50:14 by obutolin          #+#    #+#             */
-/*   Updated: 2026/05/22 12:02:28 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/05/25 10:08:48 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_map
 	char	**map;
 }	t_map;
 
-typedef struct s_input
+typedef struct s_scene
 {
 	t_texture	north;
 	t_texture	south;
@@ -45,8 +45,8 @@ typedef struct s_input
 	t_color		floor;
 	t_color		ceiling;
 	t_map		map;
-}	t_input;
+}	t_scene;
 
-int	parser(t_input *input, int arg_count, char **argv, t_memory_info *memory);
+int	parser(t_scene *scene, int arg_count, char **argv, t_memory_info *memory);
 
 #endif

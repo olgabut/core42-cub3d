@@ -26,7 +26,8 @@ PREPROC_FLAGS = -I. -I$(LIBFT_DIR) -I$(INC_DIR)
 SRC_FILES = cub3d.c \
 	src/parser/parser.c \
 	src/parser/checker.c \
-	src/parser/errors.c
+	src/parser/errors.c \
+	src/parser/read_file.c
 
 OBJS_FILES = $(SRC_FILES:%.c=$(BUILD)/%.o)
 
@@ -48,8 +49,8 @@ $(NAME): $(OBJS_FILES) $(LIBFT) $(MLX)
 
 clean:
 	rm -rf $(BUILD)
-# 	@$(MAKE) -C $(LIBFT_DIR) clean
-	@$(MAKE) -C $(MLX_DIR) clean
+	@$(MAKE) -C $(LIBFT_DIR) clean
+# 	@$(MAKE) -C $(MLX_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)

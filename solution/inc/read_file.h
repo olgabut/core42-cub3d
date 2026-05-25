@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   read_file.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/22 11:59:36 by obutolin          #+#    #+#             */
-/*   Updated: 2026/05/25 10:25:04 by obutolin         ###   ########.fr       */
+/*   Created: 2026/05/25 09:49:36 by obutolin          #+#    #+#             */
+/*   Updated: 2026/05/25 10:25:13 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "checker.h"
-#include "read_file.h"
+#ifndef READ_FILE_H
+# define READ_FILE_H
 
-/*
-	Return
-		1 - ok
-		0 - some error (stop program)
-*/
-int	parser(t_scene *scene, int arg_count, char **argv, t_memory_info *memory)
-{
-	(void)*memory;
-	(void)**argv;
+# include "cub3d.h"
 
-	if (!check_argument(arg_count) || !check_file_extantion(argv[1]))
-		return (0);
-	if (!read_file(scene, argv[1], memory))
-		return (0);
-	return (1);
-}
+int	read_file(t_scene *scene, char *file_name, t_memory_info *memory);
+
+#endif

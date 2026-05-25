@@ -62,8 +62,11 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
-// MEMORY MANAGER
+// get_next_line.c
+# define BUFFER_SIZE 4
+char				*get_next_line(int fd);
 
+// memory_manager.c
 typedef t_list	t_memory_info;
 int		add_new_memory_link_for_control(t_memory_info **head,
 			void *new_link);
