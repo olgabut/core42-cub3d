@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 09:25:16 by obutolin          #+#    #+#             */
-/*   Updated: 2026/05/25 10:53:05 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/05/27 09:04:56 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,15 @@
 int	analyse_line(t_scene *scene, char *line, t_memory_info *memory)
 {
 	(void)*scene;
-	if (ft_strncmp(line, "NO", 2) || ft_strncmp(line, "SO", 2)
-		|| (ft_strncmp(line, "WE", 2) || ft_strncmp(line, "EA", 2)))
+	char *trim_line;
+
+	trim_line = ft_strtrim(line, " ");
+	if (ft_strncmp(trim_line, "NO", 2) || ft_strncmp(trim_line, "SO", 2)
+		|| (ft_strncmp(trim_line, "WE", 2) || ft_strncmp(trim_line, "EA", 2)))
 		printf("texture\n");
-	else if ()
+	else if (ft_strncmp(trim_line, "F", 1) || ft_strncmp(trim_line, "C", 1))
+		printf("color\n");
+	free(trim_line);
 	return (1);
 }
 
