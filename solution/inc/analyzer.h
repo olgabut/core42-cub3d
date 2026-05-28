@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_file.h                                        :+:      :+:    :+:   */
+/*   analyzer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/25 09:49:36 by obutolin          #+#    #+#             */
-/*   Updated: 2026/05/28 09:28:14 by obutolin         ###   ########.fr       */
+/*   Created: 2026/05/28 09:38:57 by obutolin          #+#    #+#             */
+/*   Updated: 2026/05/28 12:14:33 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef READ_FILE_H
-# define READ_FILE_H
+#ifndef ANALYZER_H
+# define ANALYZER_H
 
-# include "cub3d.h"
+#include "cub3d.h"
 
-int	read_file(t_scene *scene, char *file_name, t_memory_info **memory);
+void	analyse_texture_info(t_scene *scene, char *line, int line_num);
 
 #endif

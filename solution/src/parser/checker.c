@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 10:35:37 by obutolin          #+#    #+#             */
-/*   Updated: 2026/05/22 12:15:06 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/05/28 12:44:56 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,3 @@ int	check_argument(int arg_count)
 		return (print_too_many_arguments(), 0);
 	return (1);
 }
-
-

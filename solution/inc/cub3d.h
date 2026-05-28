@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:50:14 by obutolin          #+#    #+#             */
-/*   Updated: 2026/05/25 10:08:48 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/05/28 12:07:43 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <errno.h>
 # include <stdio.h>
 # include <stdbool.h>
+
 
 typedef struct s_color
 {
@@ -47,6 +48,6 @@ typedef struct s_scene
 	t_map		map;
 }	t_scene;
 
-int	parser(t_scene *scene, int arg_count, char **argv, t_memory_info *memory);
+int	parser(t_scene *scene, int arg_count, char **argv, t_memory_info **memory);
 
 #endif

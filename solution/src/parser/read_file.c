@@ -6,25 +6,32 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 09:25:16 by obutolin          #+#    #+#             */
-/*   Updated: 2026/05/27 09:04:56 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/05/28 12:46:20 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "checker.h"
+#include "analyzer.h"
 
-int	analyse_line(t_scene *scene, char *line, t_memory_info *memory)
+int	analyse_line(t_scene *scene, char *line, int line_num,
+	t_memory_info **memory)
 {
-	(void)*scene;
-	char *trim_line;
+	char	*trim_line;
 
+	printf("'%s'", line);
 	trim_line = ft_strtrim(line, " ");
-	if (ft_strncmp(trim_line, "NO", 2) || ft_strncmp(trim_line, "SO", 2)
-		|| (ft_strncmp(trim_line, "WE", 2) || ft_strncmp(trim_line, "EA", 2)))
-		printf("texture\n");
-	else if (ft_strncmp(trim_line, "F", 1) || ft_strncmp(trim_line, "C", 1))
+	add_new_memory_link_for_control(memory, trim_line);
+	printf("'%s'", trim_line);
+	if (trim_line[0] == 'F' || trim_line[0] == 'C')
 		printf("color\n");
-	free(trim_line);
+	else if (ft_strncmp(trim_line, "NO", 2) == 0
+		|| ft_strncmp(trim_line, "SO", 2) == 0
+		|| ft_strncmp(trim_line, "WE", 2) == 0
+		|| ft_strncmp(trim_line, "EA", 2) == 0)
+		analyse_texture_info(scene, trim_line, line_num);
+	else
+		printf("map\n");
 	return (1);
 }
 
@@ -34,18 +41,24 @@ int	analyse_line(t_scene *scene, char *line, t_memory_info *memory)
 		0 - error (stop program)
 		1 - ok
 */
-int	read_file(t_scene *scene, char *file_name, t_memory_info *memory)
+int	read_file(t_scene *scene, char *file_name, t_memory_info **memory)
 {
-	int	fd;
-	char *line;
+	int		fd;
+	char	*line;
+	int		line_number;
 
 	fd = open(file_name, O_RDONLY | O_RDWR);
 	if (fd < 0)
 		return (print_file_not_found(), 0);
-	while ((line = get_next_line(fd)) != NULL)
+	line_number = 1;
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
-		analyse_line(scene, line, memory);
+		analyse_line(scene, line, line_number, memory);
+		line_number++;
 		free(line);
+		printf("\n");
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (1);
