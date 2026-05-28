@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 09:38:57 by obutolin          #+#    #+#             */
-/*   Updated: 2026/05/28 12:14:33 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/05/28 14:39:54 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,7 @@
 #include "cub3d.h"
 
 void	analyse_texture_info(t_scene *scene, char *line, int line_num);
+void	analyse_color_info(t_scene *scene, char *line, int line_num,
+	t_memory_info **memory);
 
 #endif

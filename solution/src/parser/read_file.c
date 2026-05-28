@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 09:25:16 by obutolin          #+#    #+#             */
-/*   Updated: 2026/05/28 12:46:20 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/05/28 14:41:41 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ int	analyse_line(t_scene *scene, char *line, int line_num,
 	printf("'%s'", line);
 	trim_line = ft_strtrim(line, " ");
 	add_new_memory_link_for_control(memory, trim_line);
-	printf("'%s'", trim_line);
 	if (trim_line[0] == 'F' || trim_line[0] == 'C')
-		printf("color\n");
+		analyse_color_info(scene, trim_line, line_num, memory);
 	else if (ft_strncmp(trim_line, "NO", 2) == 0
 		|| ft_strncmp(trim_line, "SO", 2) == 0
 		|| ft_strncmp(trim_line, "WE", 2) == 0
@@ -47,6 +46,7 @@ int	read_file(t_scene *scene, char *file_name, t_memory_info **memory)
 	char	*line;
 	int		line_number;
 
+	(void)*memory;
 	fd = open(file_name, O_RDONLY | O_RDWR);
 	if (fd < 0)
 		return (print_file_not_found(), 0);

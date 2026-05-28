@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 09:22:30 by obutolin          #+#    #+#             */
-/*   Updated: 2026/05/28 12:48:17 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/05/28 14:41:09 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	analyse_texture_info(t_scene *scene, char *line, int line_num)
 	char	texture_name[3];
 	size_t	len;
 
-	(void)*scene;
 	texture_name[0] = line[0];
 	texture_name[1] = line[1];
 	texture_name[2] = '\0';
@@ -73,4 +72,34 @@ void	analyse_texture_info(t_scene *scene, char *line, int line_num)
 		save_texture(&(scene->west), trim_path, texture_name, line_num);
 	else if (ft_strncmp(texture_name, "EA", 2) == 0)
 		save_texture(&(scene->east), trim_path, texture_name, line_num);
+}
+
+void	analyse_color_info(t_scene *scene, char *line, int line_num,
+	t_memory_info **memory)
+{
+	char	*trim_value;
+	size_t	len;
+	// char	**colors;
+	// int		i;
+
+	(void)*memory;
+	(void)*scene;
+	// if (line[0] == 'C')
+	// 	*surface = "ceiling";
+	// else
+	// 	*surface = "floor";
+	if (line[1] != ' ')
+		printf("Warning Line %d. No space after %c.\n", line_num, line[0]);
+	trim_value = trim_string(line + 1);
+	len = ft_strlen(trim_value);
+	if (len < 1)
+		printf("Warning Line %d. No info about color.\n", line_num);
+	// colors = ft_split(trim_value, ',');
+	// i = 0;
+	// while (colors[i] != NULL)
+	// {
+	// 	printf("color [%d] = %s\n", i, colors[i]);
+	// 	add_new_memory_link_for_control(memory, colors);
+	// 	i++;
+	// }
 }
