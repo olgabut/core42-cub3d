@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 09:25:16 by obutolin          #+#    #+#             */
-/*   Updated: 2026/05/28 14:41:41 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/05/29 10:17:51 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ int	analyse_line(t_scene *scene, char *line, int line_num,
 		|| ft_strncmp(trim_line, "EA", 2) == 0)
 		analyse_texture_info(scene, trim_line, line_num);
 	else
-		printf("map\n");
+	{
+		//printf("map\n");
+	}
 	return (1);
 }
 

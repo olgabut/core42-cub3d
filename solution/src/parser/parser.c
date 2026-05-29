@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 11:59:36 by obutolin          #+#    #+#             */
-/*   Updated: 2026/05/28 14:42:00 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/05/29 11:55:55 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	print_scene_struct(t_scene scene)
 	printf("WE = '%s'\n", scene.west.texture);
 	printf("EA = '%s'\n", scene.east.texture);
 	printf("ceilind RGB(%d, %d, %d)\n",
-		scene.ceiling.red, scene.ceiling.green, scene.ceiling.blue);
+		scene.ceiling.color[0], scene.ceiling.color[1], scene.ceiling.color[2]);
 	printf("floor RGB(%d, %d, %d)\n",
-		scene.floor.red, scene.floor.green, scene.floor.blue);
+		scene.floor.color[0], scene.floor.color[1], scene.floor.color[2]);
 }
 
 void	init_scene(t_scene *scene)
@@ -39,12 +39,12 @@ void	init_scene(t_scene *scene)
 	scene->south.texture = NULL;
 	scene->west.texture = NULL;
 	scene->east.texture = NULL;
-	scene->ceiling.red = -1;
-	scene->ceiling.green = -1;
-	scene->ceiling.blue = -1;
-	scene->floor.red = -1;
-	scene->floor.green = -1;
-	scene->floor.blue = -1;
+	scene->ceiling.color[0] = -1;
+	scene->ceiling.color[1] = -1;
+	scene->ceiling.color[2] = -1;
+	scene->floor.color[0] = -1;
+	scene->floor.color[1] = -1;
+	scene->floor.color[2] = -1;
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:50:14 by obutolin          #+#    #+#             */
-/*   Updated: 2026/05/28 12:07:43 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/05/29 11:53:02 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@
 
 typedef struct s_color
 {
-	int	red;
-	int	green;
-	int	blue;
+	int	color[3];
 }	t_color;
 
 typedef struct s_texture

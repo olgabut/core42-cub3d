@@ -1,38 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_analyzer.c                                    :+:      :+:    :+:   */
+/*   analyzer_texture.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 09:22:30 by obutolin          #+#    #+#             */
-/*   Updated: 2026/05/28 14:41:09 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/05/29 12:11:46 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*trim_string(char *str)
-{
-	size_t	len;
-	size_t	i;
 
-	while (*str == ' ')
-		str++;
-	len = ft_strlen(str);
-	if (len < 1)
-		return (str);
-	i = 0;
-	if (str[len - 1] == '\n')
-	{
-		str[len - 1] = '\0';
-		i = 1;
-	}
-	while ((len > (i + 1)) && str[len - i - 1] == ' ')
-		i++;
-	str[len - i] = '\0';
-	return (str);
-}
 
 void	save_texture(t_texture *where, char *what,
 		char texture_name[3], int line_num)
@@ -59,7 +39,7 @@ void	analyse_texture_info(t_scene *scene, char *line, int line_num)
 	texture_name[2] = '\0';
 	if (line[2] != ' ')
 		printf("Warning Line %d. No space after %s.\n", line_num, texture_name);
-	trim_path = trim_string(line + 2);
+	trim_path = ft_strtrim_changed(line + 2);
 	len = ft_strlen(trim_path);
 	if (len < 1)
 		printf("Warning Line %d. No file for texture %s.\n",
@@ -74,32 +54,4 @@ void	analyse_texture_info(t_scene *scene, char *line, int line_num)
 		save_texture(&(scene->east), trim_path, texture_name, line_num);
 }
 
-void	analyse_color_info(t_scene *scene, char *line, int line_num,
-	t_memory_info **memory)
-{
-	char	*trim_value;
-	size_t	len;
-	// char	**colors;
-	// int		i;
 
-	(void)*memory;
-	(void)*scene;
-	// if (line[0] == 'C')
-	// 	*surface = "ceiling";
-	// else
-	// 	*surface = "floor";
-	if (line[1] != ' ')
-		printf("Warning Line %d. No space after %c.\n", line_num, line[0]);
-	trim_value = trim_string(line + 1);
-	len = ft_strlen(trim_value);
-	if (len < 1)
-		printf("Warning Line %d. No info about color.\n", line_num);
-	// colors = ft_split(trim_value, ',');
-	// i = 0;
-	// while (colors[i] != NULL)
-	// {
-	// 	printf("color [%d] = %s\n", i, colors[i]);
-	// 	add_new_memory_link_for_control(memory, colors);
-	// 	i++;
-	// }
-}
