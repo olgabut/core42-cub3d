@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 12:03:11 by obutolin          #+#    #+#             */
-/*   Updated: 2026/05/29 12:35:55 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/02 12:17:12 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	get_dig_color(int *dig, char *value)
 	return (1);
 }
 
-int	save_colors(t_scene *scene, char surface, int line_num, char **cols)
+int	save_colors(t_color *surface, char **cols)
 {
 	int	i;
 	int	dig_value[3];
@@ -32,15 +32,16 @@ int	save_colors(t_scene *scene, char surface, int line_num, char **cols)
 	i = 0;
 	while (i < 3)
 	{
-		if (get_dig_color())
+		if (!get_dig_color(&dig_value[i], cols[i]))
+			return (0);
 		i++;
 	}
-	if (color->color[i] != -1)
+	i = 0;
+	while (i < 3)
 	{
-		printf("Warning Line %d. Duplicate color definition\n", line_num);
-		return (0);
+		surface->color[i] = dig_value[i];
+		i++;
 	}
-	color = dig_value;
 	return (1);
 }
 
@@ -50,24 +51,26 @@ void	analyse_color_info(t_scene *scene, char *line, int line_num,
 	char	**cols;
 	int		i;
 	int		wrong;
+	t_color	*surface;
 
-	(void)*scene;
+	if (line[0] == 'C')
+		surface = &(scene->ceiling);
+	else
+		surface = &(scene->floor);
+	if (surface->color[0] != -1)
+	{
+		printf("Warning Line %d. Duplicate color definition. ", line_num);
+		printf("Only the first value specified will be used.\n");
+		return ;
+	}
 	if (line[1] != ' ')
 		printf("Warning Line %d. No space after %c.\n", line_num, line[0]);
 	cols = ft_split(line + 1, ',');
 	add_new_memory_link_for_control(memory, cols);
 	i = 0;
-	wrong = false;
 	while (cols[i] != NULL)
-	{
-		add_new_memory_link_for_control(memory, cols[i]);
-		wrong = i > 2;
-		i++;
-	}
-	// (!save_a_color(&(scene->ceiling), line_num, i, cols[i]));
-	if (wrong || !save_colors(scene, line[0], line_num, cols))
-	{
+		add_new_memory_link_for_control(memory, cols[i++]);
+	wrong = i > 3;
+	if (wrong || !save_colors(surface, cols))
 		printf("Warning Line %d. Wrong color value.", line_num);
-		return ;
-	}
 }

@@ -6,13 +6,11 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 09:22:30 by obutolin          #+#    #+#             */
-/*   Updated: 2026/05/29 12:11:46 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/02 12:18:20 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-
 
 void	save_texture(t_texture *where, char *what,
 		char texture_name[3], int line_num)
@@ -23,8 +21,11 @@ void	save_texture(t_texture *where, char *what,
 	if (len < 1)
 		return ;
 	if (where->texture != NULL)
-		printf("Warning Line %d. Duplicate %s texture definition\n",
+	{
+		printf("Warning Line %d. Duplicate %s texture definition. ",
 			line_num, texture_name);
+		printf("Only the first value specified will be used.\n");
+	}
 	where->texture = what;
 }
 
@@ -53,5 +54,3 @@ void	analyse_texture_info(t_scene *scene, char *line, int line_num)
 	else if (ft_strncmp(texture_name, "EA", 2) == 0)
 		save_texture(&(scene->east), trim_path, texture_name, line_num);
 }
-
-
