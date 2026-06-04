@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 09:25:16 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/04 07:47:13 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/04 14:56:19 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,41 @@
 #include "checker.h"
 #include "analyzer.h"
 
-int	analyse_line(t_scene *scene, char *line, int line_num)
+size_t	count_first_spaces(char *line)
 {
-	char	*trimed_line;
+	size_t i;
 
-	printf("'%s'", line);
-	trimed_line = ft_strtrim(line, " ");
-	add_new_memory_link_for_control(&scene->memory, trimed_line);
-	if (trimed_line[0] == 'F' || trimed_line[0] == 'C')
-		analyse_color(scene, trimed_line, line_num);
-	else if (ft_strncmp(trimed_line, "NO", 2) == 0
-		|| ft_strncmp(trimed_line, "SO", 2) == 0
-		|| ft_strncmp(trimed_line, "WE", 2) == 0
-		|| ft_strncmp(trimed_line, "EA", 2) == 0)
-		analyse_texture(scene, trimed_line, line_num);
-	else
+	i = 0;
+	while (line[i] == ' ')
+		i++;
+	return (i);
+}
+
+void	analyse_line(t_scene *scene, char *line, int line_num)
+{
+	size_t	len;
+	char *no_spaces_line;
+
+	len = ft_strlen(line);
+	if (line[len - 1] == '\n')
+		line[len - 1] = '\0';
+	if (scene->data_status == MAP_PROCESSING)
 	{
 		analyse_map_line(scene, line, line_num);
-		//printf("map\n");
+		return ;
 	}
-	return (1);
+	no_spaces_line = line + count_first_spaces(line);
+	if (ft_strlen(no_spaces_line) < 1)
+		return ;
+	if (no_spaces_line[0] == 'F' || no_spaces_line[0] == 'C')
+		analyse_color(scene, no_spaces_line, line_num);
+	else if (ft_strncmp(no_spaces_line, "NO", 2) == 0
+		|| ft_strncmp(no_spaces_line, "SO", 2) == 0
+		|| ft_strncmp(no_spaces_line, "WE", 2) == 0
+		|| ft_strncmp(no_spaces_line, "EA", 2) == 0)
+		analyse_texture(scene, no_spaces_line, line_num);
+	else
+		analyse_map_line(scene, line, line_num);
 }
 
 /*
@@ -55,10 +70,10 @@ int	read_file(t_scene *scene, char *file_name)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		analyse_line(scene, line, line_number);
+		if (scene->data_status != WRONG)
+			analyse_line(scene, line, line_number);
 		line_number++;
-		free(line);
-		printf("\n");
+		add_new_memory_link_for_control(&scene->memory, line);
 		line = get_next_line(fd);
 	}
 	close(fd);

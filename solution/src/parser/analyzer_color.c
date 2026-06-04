@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 12:03:11 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/04 07:47:25 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/04 14:45:07 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	analyse_color(t_scene *scene, char *line, int line_num)
 		surface = &(scene->floor);
 	if (surface->color[0] != -1)
 	{
-		printf("Warning Line %d. Duplicate color definition. ", line_num);
-		printf("Only the first value specified will be used.\n");
+		printf("Error\nLine %d. Duplicate color definition.\n", line_num);
+		scene->data_status = WRONG;
 		return ;
 	}
 	if (line[1] != ' ')
@@ -69,7 +69,10 @@ void	analyse_color(t_scene *scene, char *line, int line_num)
 	i = 0;
 	while (cols[i] != NULL)
 		add_new_memory_link_for_control(&scene->memory, cols[i++]);
-	wrong = i > 3;
+	wrong = i != 3;
 	if (wrong || !save_colors(surface, cols))
-		printf("Warning Line %d. Wrong color value.", line_num);
+	{
+		printf("Error\nLine %d. Wrong color value.", line_num);
+		scene->data_status = WRONG;
+	}
 }

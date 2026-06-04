@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 11:59:36 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/03 21:50:47 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/04 11:30:00 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	print_scene_struct(t_scene scene)
 
 void	init_scene(t_scene *scene)
 {
+	scene->data_status = OK;
 	scene->north.texture = NULL;
 	scene->south.texture = NULL;
 	scene->west.texture = NULL;
