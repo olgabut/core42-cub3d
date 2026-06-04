@@ -29,7 +29,8 @@ SRC_FILES = cub3d.c \
 	src/parser/errors.c \
 	src/parser/read_file.c \
 	src/parser/analyzer_texture.c \
-	src/parser/analyzer_color.c
+	src/parser/analyzer_color.c \
+	src/parser/analyzer_map.c
 
 OBJS_FILES = $(SRC_FILES:%.c=$(BUILD)/%.o)
 

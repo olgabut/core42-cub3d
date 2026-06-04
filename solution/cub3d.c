@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:48:26 by obutolin          #+#    #+#             */
-/*   Updated: 2026/05/28 09:27:18 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/03 21:50:22 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 int	main(int argc, char **argv)
 {
 	t_scene			scene;
-	t_memory_info	*memory;
 
-	memory = NULL;
-	if (!parser(&scene, argc - 1, argv, &memory))
+	scene.memory = NULL;
+	if (!parser(&scene, argc - 1, argv))
 		return (1);
-	free_memory_links(&memory);
+	free_memory_links(&scene.memory);
 
 	// void	*mlx;
 	// void	*win;

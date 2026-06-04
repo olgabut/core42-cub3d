@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 11:59:36 by obutolin          #+#    #+#             */
-/*   Updated: 2026/05/29 11:55:55 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/03 21:50:47 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "checker.h"
 #include "read_file.h"
 
-	// t_texture	north; //NO
+	// t_texture	north;
 	// t_texture	south;
 	// t_texture	west;
 	// t_texture	east;
@@ -45,6 +45,9 @@ void	init_scene(t_scene *scene)
 	scene->floor.color[0] = -1;
 	scene->floor.color[1] = -1;
 	scene->floor.color[2] = -1;
+	scene->map.file_map_line_first = -1;
+	scene->map.file_map_line_last = -1;
+	scene->map.map_list_header = NULL;
 }
 
 /*
@@ -52,12 +55,12 @@ void	init_scene(t_scene *scene)
 		1 - ok
 		0 - some error (stop program)
 */
-int	parser(t_scene *scene, int arg_count, char **argv, t_memory_info **memory)
+int	parser(t_scene *scene, int arg_count, char **argv)
 {
 	if (!check_argument(arg_count) || !check_file_extantion(argv[1]))
 		return (0);
 	init_scene(scene);
-	if (!read_file(scene, argv[1], memory))
+	if (!read_file(scene, argv[1]))
 		return (0);
 	print_scene_struct(*scene);
 	return (1);

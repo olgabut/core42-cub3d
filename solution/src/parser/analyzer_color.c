@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 12:03:11 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/02 12:17:12 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/04 07:47:25 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ int	save_colors(t_color *surface, char **cols)
 	return (1);
 }
 
-void	analyse_color_info(t_scene *scene, char *line, int line_num,
-	t_memory_info **memory)
+void	analyse_color(t_scene *scene, char *line, int line_num)
 {
 	char	**cols;
 	int		i;
@@ -66,10 +65,10 @@ void	analyse_color_info(t_scene *scene, char *line, int line_num,
 	if (line[1] != ' ')
 		printf("Warning Line %d. No space after %c.\n", line_num, line[0]);
 	cols = ft_split(line + 1, ',');
-	add_new_memory_link_for_control(memory, cols);
+	add_new_memory_link_for_control(&scene->memory, cols);
 	i = 0;
 	while (cols[i] != NULL)
-		add_new_memory_link_for_control(memory, cols[i++]);
+		add_new_memory_link_for_control(&scene->memory, cols[i++]);
 	wrong = i > 3;
 	if (wrong || !save_colors(surface, cols))
 		printf("Warning Line %d. Wrong color value.", line_num);

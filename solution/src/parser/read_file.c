@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 09:25:16 by obutolin          #+#    #+#             */
-/*   Updated: 2026/05/29 10:17:51 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/04 07:47:13 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 #include "checker.h"
 #include "analyzer.h"
 
-int	analyse_line(t_scene *scene, char *line, int line_num,
-	t_memory_info **memory)
+int	analyse_line(t_scene *scene, char *line, int line_num)
 {
-	char	*trim_line;
+	char	*trimed_line;
 
 	printf("'%s'", line);
-	trim_line = ft_strtrim(line, " ");
-	add_new_memory_link_for_control(memory, trim_line);
-	if (trim_line[0] == 'F' || trim_line[0] == 'C')
-		analyse_color_info(scene, trim_line, line_num, memory);
-	else if (ft_strncmp(trim_line, "NO", 2) == 0
-		|| ft_strncmp(trim_line, "SO", 2) == 0
-		|| ft_strncmp(trim_line, "WE", 2) == 0
-		|| ft_strncmp(trim_line, "EA", 2) == 0)
-		analyse_texture_info(scene, trim_line, line_num);
+	trimed_line = ft_strtrim(line, " ");
+	add_new_memory_link_for_control(&scene->memory, trimed_line);
+	if (trimed_line[0] == 'F' || trimed_line[0] == 'C')
+		analyse_color(scene, trimed_line, line_num);
+	else if (ft_strncmp(trimed_line, "NO", 2) == 0
+		|| ft_strncmp(trimed_line, "SO", 2) == 0
+		|| ft_strncmp(trimed_line, "WE", 2) == 0
+		|| ft_strncmp(trimed_line, "EA", 2) == 0)
+		analyse_texture(scene, trimed_line, line_num);
 	else
 	{
+		analyse_map_line(scene, line, line_num);
 		//printf("map\n");
 	}
 	return (1);
@@ -42,13 +42,12 @@ int	analyse_line(t_scene *scene, char *line, int line_num,
 		0 - error (stop program)
 		1 - ok
 */
-int	read_file(t_scene *scene, char *file_name, t_memory_info **memory)
+int	read_file(t_scene *scene, char *file_name)
 {
 	int		fd;
 	char	*line;
 	int		line_number;
 
-	(void)*memory;
 	fd = open(file_name, O_RDONLY | O_RDWR);
 	if (fd < 0)
 		return (print_file_not_found(), 0);
@@ -56,7 +55,7 @@ int	read_file(t_scene *scene, char *file_name, t_memory_info **memory)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		analyse_line(scene, line, line_number, memory);
+		analyse_line(scene, line, line_number);
 		line_number++;
 		free(line);
 		printf("\n");

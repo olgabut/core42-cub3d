@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 09:22:30 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/02 12:18:20 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/03 14:22:02 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	save_texture(t_texture *where, char *what,
 	where->texture = what;
 }
 
-void	analyse_texture_info(t_scene *scene, char *line, int line_num)
+void	analyse_texture(t_scene *scene, char *line, int line_num)
 {
 	char	*trim_path;
 	char	texture_name[3];
