@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 12:03:11 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/04 14:45:07 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/07 17:21:42 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	analyse_color(t_scene *scene, char *line, int line_num)
 		return ;
 	}
 	if (line[1] != ' ')
-		printf("Warning Line %d. No space after %c.\n", line_num, line[0]);
+		printf("Warning\nLine %d. No space after %c.\n", line_num, line[0]);
 	cols = ft_split(line + 1, ',');
 	add_new_memory_link_for_control(&scene->memory, cols);
 	i = 0;

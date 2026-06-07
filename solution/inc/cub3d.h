@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:50:14 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/04 11:35:08 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/07 16:31:22 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,20 @@ enum e_map_status
 
 typedef struct s_map_list
 {
-	struct s_map_line	*next;
+	struct s_map_list	*next;
 	char				*line;
 }						t_map_list;
 
 //player_orientation can be 'N','S','E' or 'W'
 typedef struct s_map
 {
-	int			file_map_line_first;
-	int			file_map_line_last;
+	int			first_line_in_file;
+	int			last_line_in_file;
 	int			player_position_x;
 	int			player_position_y;
 	char		player_orientation;
 	t_map_list	*map_list_header;
+	char		**map;
 	size_t		size_x;
 	size_t		size_y;
 }				t_map;
