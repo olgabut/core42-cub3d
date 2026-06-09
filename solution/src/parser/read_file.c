@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 09:25:16 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/04 14:56:19 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/09 11:42:00 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "checker.h"
 #include "analyzer.h"
 
-size_t	count_first_spaces(char *line)
+static size_t	count_first_spaces(char *line)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (line[i] == ' ')
@@ -24,10 +24,10 @@ size_t	count_first_spaces(char *line)
 	return (i);
 }
 
-void	analyse_line(t_scene *scene, char *line, int line_num)
+static void	analyse_line(t_scene *scene, char *line, int line_num)
 {
 	size_t	len;
-	char *no_spaces_line;
+	char	*no_spaces_line;
 
 	len = ft_strlen(line);
 	if (line[len - 1] == '\n')
@@ -65,7 +65,7 @@ int	read_file(t_scene *scene, char *file_name)
 
 	fd = open(file_name, O_RDONLY | O_RDWR);
 	if (fd < 0)
-		return (print_file_not_found(), 0);
+		return (print_common_error(FILE_NOT_FOUND), 0);
 	line_number = 1;
 	line = get_next_line(fd);
 	while (line != NULL)

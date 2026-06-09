@@ -26,12 +26,13 @@ PREPROC_FLAGS = -I. -I$(LIBFT_DIR) -I$(INC_DIR)
 SRC_FILES = cub3d.c \
 	src/parser/parser.c \
 	src/parser/checker.c \
-	src/parser/errors.c \
+	src/parser/print_message.c \
 	src/parser/read_file.c \
 	src/parser/analyzer_texture.c \
 	src/parser/analyzer_color.c \
 	src/parser/analyzer_map.c \
-	src/parser/map_list_manager.c
+	src/parser/map_list_manager.c \
+	src/parser/map_arr_manager.c
 
 OBJS_FILES = $(SRC_FILES:%.c=$(BUILD)/%.o)
 

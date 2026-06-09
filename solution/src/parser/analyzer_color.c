@@ -6,13 +6,14 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 12:03:11 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/07 17:21:42 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/09 11:40:33 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "checker.h"
 
-int	get_dig_color(int *dig, char *value)
+static int	get_dig_color(int *dig, char *value)
 {
 	int	dig_value;
 
@@ -24,7 +25,7 @@ int	get_dig_color(int *dig, char *value)
 	return (1);
 }
 
-int	save_colors(t_color *surface, char **cols)
+static int	save_colors(t_color *surface, char **cols)
 {
 	int	i;
 	int	dig_value[3];
@@ -45,11 +46,24 @@ int	save_colors(t_color *surface, char **cols)
 	return (1);
 }
 
-void	analyse_color(t_scene *scene, char *line, int line_num)
+static char	**split_color_value(t_scene *scene, char *line, int *cols_count)
 {
 	char	**cols;
 	int		i;
-	int		wrong;
+
+	cols = ft_split(line + 1, ',');
+	add_new_memory_link_for_control(&scene->memory, cols);
+	i = 0;
+	while (cols[i] != NULL)
+		add_new_memory_link_for_control(&scene->memory, cols[i++]);
+	*cols_count = i;
+	return (cols);
+}
+
+void	analyse_color(t_scene *scene, char *line, int line_num)
+{
+	char	**cols;
+	int		cols_count;
 	t_color	*surface;
 
 	if (line[0] == 'C')
@@ -58,21 +72,17 @@ void	analyse_color(t_scene *scene, char *line, int line_num)
 		surface = &(scene->floor);
 	if (surface->color[0] != -1)
 	{
-		printf("Error\nLine %d. Duplicate color definition.\n", line_num);
+		print_file_content_error(MUPTIPLE_COLOR, line_num, "");
 		scene->data_status = WRONG;
 		return ;
 	}
 	if (line[1] != ' ')
-		printf("Warning\nLine %d. No space after %c.\n", line_num, line[0]);
-	cols = ft_split(line + 1, ',');
-	add_new_memory_link_for_control(&scene->memory, cols);
-	i = 0;
-	while (cols[i] != NULL)
-		add_new_memory_link_for_control(&scene->memory, cols[i++]);
-	wrong = i != 3;
-	if (wrong || !save_colors(surface, cols))
+		print_file_content_warning(NO_SPACE, line_num, "");
+	cols_count = 0;
+	cols = split_color_value(scene, line, &cols_count);
+	if (cols_count != 3 || !save_colors(surface, cols))
 	{
-		printf("Error\nLine %d. Wrong color value.", line_num);
+		print_file_content_error(WRONG_COLOR_VALUE, line_num, "");
 		scene->data_status = WRONG;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 15:49:09 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/07 17:33:01 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/09 11:43:46 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_map_list	*get_last_map_list(t_map_list *head)
 void	print_map_list(t_map_list *head)
 {
 	t_map_list	*map_list;
-	int i;
+	int			i;
 
 	map_list = head;
 	printf("Print map_lists:\n");

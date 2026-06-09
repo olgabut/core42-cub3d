@@ -6,39 +6,39 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 09:22:30 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/04 14:18:43 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/09 11:41:28 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "checker.h"
 
 /*
 	Return
 		1 - ok (saved)
 		0 - error
 */
-int	save_texture(t_texture *where, char *what,
+static int	save_texture(t_texture *where, char *what,
 		char texture_id[3], int line_num)
 {
 	if (where->texture != NULL)
 	{
-		printf("Error\nLine %d. Duplicate %s texture definition. ",
-			line_num, texture_id);
+		print_file_content_error(MUPTIPLE_TEXTURE, line_num, texture_id);
 		return (0);
 	}
 	where->texture = what;
 	return (1);
 }
 
-int is_texture_value(t_scene *scene, char *value, char texture_id[3],
+static int	is_texture_value(t_scene *scene, char *value, char texture_id[3],
 	int line_num)
 {
 	size_t	len;
+
 	len = ft_strlen(value);
 	if (len < 1)
 	{
-		printf("Error\nLine %d. No path for texture %s.\n",
-			line_num, texture_id);
+		print_file_content_error(NO_TEXTURE, line_num, texture_id);
 		scene->data_status = WRONG;
 		return (0);
 	}
@@ -55,7 +55,7 @@ void	analyse_texture(t_scene *scene, char *line, int line_num)
 	texture_id[1] = line[1];
 	texture_id[2] = '\0';
 	if (line[2] != ' ')
-		printf("Warning. Line %d. No space after %s.\n", line_num, texture_id);
+		print_file_content_warning(NO_SPACE, line_num, "");
 	trim_path = ft_strtrim_changed(line + 2);
 	if (!is_texture_value(scene, trim_path, texture_id, line_num))
 		return ;

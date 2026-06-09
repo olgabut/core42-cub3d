@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:50:14 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/07 16:31:22 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/09 09:51:54 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,6 @@ typedef struct s_texture
 {
 	char	*texture;
 }	t_texture;
-
-enum e_map_status
-{
-	NOT,
-	READING,
-	DUPLICATE
-};
 
 typedef struct s_map_list
 {
@@ -66,6 +59,7 @@ enum e_status
 typedef struct s_scene
 {
 	t_memory_info	*memory;
+	enum e_status	data_status;
 	t_texture		north;
 	t_texture		south;
 	t_texture		west;
@@ -73,7 +67,6 @@ typedef struct s_scene
 	t_color			floor;
 	t_color			ceiling;
 	t_map			map;
-	enum e_status	data_status;
 }	t_scene;
 
 int	parser(t_scene *scene, int arg_count, char **argv);
