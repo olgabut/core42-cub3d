@@ -18,6 +18,9 @@
 # include <errno.h>
 # include <stdio.h>
 # include <stdbool.h>
+# include <math.h>
+# include "minilibx_opengl_20191021/mlx.h"
+# include <stdlib.h>
 
 typedef struct s_color
 {

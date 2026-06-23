@@ -11,31 +11,34 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "renderer.h"
 
 int	main(int argc, char **argv)
 {
-	t_scene			scene;
+	t_scene		scene;
+	t_graphics	graphics;
 
 	scene.memory = NULL;
 	if (!parser(&scene, argc - 1, argv))
 		return (1);
+	if (!init_graphics(&graphics, &scene))
+	{
+		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd("Failed to initialize graphics\n", 2);
+		free_memory_links(&scene.memory);
+		return (1);
+	}
+	mlx_hook(graphics.window, 2, 1L << 0, handle_key_press, &graphics);
+	mlx_hook(graphics.window, 3, 1L << 1, handle_key_release, &graphics);
+	mlx_hook(graphics.window, 17, 1L << 17, handle_close, &graphics);
+	#ifdef BONUS
+	mlx_hook(graphics.window, 6, 0, handle_mouse, &graphics);
+	mlx_mouse_hide();
+	#endif
+	mlx_loop_hook(graphics.mlx, game_loop, &graphics);
+	mlx_loop(graphics.mlx);
+	free_graphics(&graphics);
 	free_memory_links(&scene.memory);
-
-	// void	*mlx;
-	// void	*win;
-
-	// printf("prog = %s\n", argv[0]);
-	// if (argc > 1)
-	// 	printf("argv[1] = %s\n", argv[0]);
-
-	// mlx = mlx_init();
-	// if (!mlx)
-	// 	return (1);
-
-	// win = mlx_new_window(mlx, 800, 600, "MLX Test");
-	// if (!win)
-	// 	return (1);
-
-	// mlx_loop(mlx);
 	return (0);
 }
+
