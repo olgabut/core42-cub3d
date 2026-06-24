@@ -45,14 +45,14 @@ int	handle_key_press(int keycode, t_graphics *graphics)
 	if (keycode == KEY_F)
 		toggle_door(graphics);
 	#endif
-	if (keycode >= 0 && keycode < 256)
+	if (keycode >= 0 && keycode < 70000)
 		graphics->keys_pressed[keycode] = 1;
 	return (0);
 }
 
 int	handle_key_release(int keycode, t_graphics *graphics)
 {
-	if (keycode >= 0 && keycode < 256)
+	if (keycode >= 0 && keycode < 70000)
 		graphics->keys_pressed[keycode] = 0;
 	return (0);
 }
@@ -135,13 +135,13 @@ static void	update_player(t_graphics *graphics)
 	}
 	if (graphics->keys_pressed[KEY_A])
 	{
-		move_x -= cos(graphics->player.angle + M_PI / 2) * graphics->move_speed;
-		move_y -= sin(graphics->player.angle + M_PI / 2) * graphics->move_speed;
+		move_x -= cos(graphics->player.angle + PI / 2) * graphics->move_speed;
+		move_y -= sin(graphics->player.angle + PI / 2) * graphics->move_speed;
 	}
 	if (graphics->keys_pressed[KEY_D])
 	{
-		move_x += cos(graphics->player.angle + M_PI / 2) * graphics->move_speed;
-		move_y += sin(graphics->player.angle + M_PI / 2) * graphics->move_speed;
+		move_x += cos(graphics->player.angle + PI / 2) * graphics->move_speed;
+		move_y += sin(graphics->player.angle + PI / 2) * graphics->move_speed;
 	}
 	new_x = graphics->player.x + move_x;
 	new_y = graphics->player.y + move_y;
