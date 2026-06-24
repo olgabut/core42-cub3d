@@ -7,18 +7,20 @@ ifeq ($(MODE),debug)
 	CFLAGS += $(DFLAGS)
 endif
 
-OS := $(shell uname)
-# Linux
-# MLX_DIR = minilibx-linux
-# MLX = $(MLX_DIR)/libmlx.a
-# MLX_FLAGS = -I$(MLX_DIR)
-# MLX_LINKS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
-
+ifdef __APPLE__
 # macOS
 MLX_DIR = minilibx_opengl_20191021
 MLX = $(MLX_DIR)/libmlx.a
 MLX_FLAGS = -I$(MLX_DIR) -DGL_SILENCE_DEPRECATION
 MLX_LINKS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit -lm -lz
+else
+# Linux
+MLX_DIR = minilibx-linux
+MLX = $(MLX_DIR)/libmlx.a
+MLX_FLAGS = -I$(MLX_DIR)
+MLX_LINKS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
+endif
+
 
 
 LIBFT_DIR	= libft

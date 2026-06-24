@@ -8,6 +8,7 @@
 # define PI				3.14159265359
 # define FOV			60
 
+# ifdef __APPLE__
 /* macOS key codes */
 # define KEY_W			13
 # define KEY_A			0
@@ -19,6 +20,19 @@
 # define KEY_RIGHT		124
 # define KEY_ESC		53
 # define KEY_F			3
+# else
+/* linux key codes */
+# define KEY_W			119
+# define KEY_A			97
+# define KEY_S			115
+# define KEY_D			100
+# define KEY_UP			65362
+# define KEY_DOWN		65364
+# define KEY_LEFT		65361
+# define KEY_RIGHT		65363
+# define KEY_ESC		65307
+# define KEY_F			102
+# endif
 
 /* minimap params */
 # define MM_SCALE		8
@@ -118,7 +132,7 @@ typedef struct s_graphics
 	int			rotated;
 	double		move_speed;
 	double		rotate_speed;
-	char		keys_pressed[256];
+	char		keys_pressed[70000];
 	char		door_state[64][64]; // 0 = closed, 1 = opened
 }	t_graphics;
 
