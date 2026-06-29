@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 09:38:57 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/09 12:08:01 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/29 11:47:35 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ int		create_map_list(t_map_list **map_list, char *line);
 void	add_new_map_list(t_map_list **head, t_map_list *new_map_list);
 void	print_map_list(t_map_list *head);
 int		conver_map_list_to_arr(t_scene *scene);
+int		copy_map_array(char ***copy, t_scene *scene);
+void	print_map_array(char **map);
 
 #endif
