@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 12:06:33 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/29 11:47:01 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/29 12:09:03 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int	copy_map_array(char ***copy, t_scene *scene)
 		i++;
 	}
 	map[scene->map.size_y] = NULL;
-	scene->map.map = map;
 	*copy = map;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 11:59:36 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/29 11:47:12 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/29 11:49:40 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,5 @@ int	parser(t_scene *scene, int arg_count, char **argv)
 	print_scene_struct(*scene);
 	if (!check_map_array(scene))
 		return (0);
-	
 	return (1);
 }
