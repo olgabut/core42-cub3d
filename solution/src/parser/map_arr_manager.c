@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 12:06:33 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/29 12:09:03 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/01 17:31:51 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,8 @@ int	copy_map_array(char ***copy, t_scene *scene)
 	i = 0;
 	while (i < scene->map.size_y)
 	{
-		map[i] = malloc((scene->map.size_x + 1) * sizeof(char));
-		if (!map[i])
-			return (0);
-		add_new_memory_link_for_control(&scene->memory, map[i]);
 		map[i] = ft_strdup(scene->map.map[i]);
+		add_new_memory_link_for_control(&scene->memory, map[i]);
 		i++;
 	}
 	map[scene->map.size_y] = NULL;
