@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 11:59:36 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/09 12:15:25 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/29 11:49:40 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ The function is only needed to display the input data before rendering
 */
 void	print_scene_struct(t_scene scene)
 {
-	size_t	i;
-	size_t	j;
-
 	printf("NO = '%s'\n", scene.north.texture);
 	printf("SO = '%s'\n", scene.south.texture);
 	printf("WE = '%s'\n", scene.west.texture);
@@ -42,16 +39,7 @@ void	print_scene_struct(t_scene scene)
 		scene.map.player_position_x, scene.map.player_position_y);
 	printf("map size = (%zu, %zu)\n", scene.map.size_x, scene.map.size_y);
 	print_map_list(scene.map.map_list_header);
-	i = 0;
-	while (i < scene.map.size_y)
-	{
-		printf("'");
-		j = 0;
-		while (j < scene.map.size_x)
-			printf("%c", scene.map.map[i][j++]);
-		i++;
-		printf("'\n");
-	}
+	print_map_array(scene.map.map);
 }
 
 static void	init_scene(t_scene *scene)
@@ -102,5 +90,7 @@ int	parser(t_scene *scene, int arg_count, char **argv)
 		return (0);
 	}
 	print_scene_struct(*scene);
+	if (!check_map_array(scene))
+		return (0);
 	return (1);
 }

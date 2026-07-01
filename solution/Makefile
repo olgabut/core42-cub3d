@@ -32,7 +32,8 @@ SRC_FILES = cub3d.c \
 	src/parser/analyzer_color.c \
 	src/parser/analyzer_map.c \
 	src/parser/map_list_manager.c \
-	src/parser/map_arr_manager.c
+	src/parser/map_arr_manager.c \
+	src/parser/check_map_array.c
 
 OBJS_FILES = $(SRC_FILES:%.c=$(BUILD)/%.o)
 

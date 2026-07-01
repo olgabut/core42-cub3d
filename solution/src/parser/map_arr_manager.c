@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 12:06:33 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/09 12:18:58 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/06/29 12:09:03 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,45 @@ int	conver_map_list_to_arr(t_scene *scene)
 	map[scene->map.size_y] = NULL;
 	scene->map.map = map;
 	return (1);
+}
+
+int	copy_map_array(char ***copy, t_scene *scene)
+{
+	char	**map;
+	size_t	i;
+
+	map = malloc((scene->map.size_y + 1) * sizeof(char *));
+	if (!map)
+		return (0);
+	add_new_memory_link_for_control(&scene->memory, map);
+	i = 0;
+	while (i < scene->map.size_y)
+	{
+		map[i] = malloc((scene->map.size_x + 1) * sizeof(char));
+		if (!map[i])
+			return (0);
+		add_new_memory_link_for_control(&scene->memory, map[i]);
+		map[i] = ft_strdup(scene->map.map[i]);
+		i++;
+	}
+	map[scene->map.size_y] = NULL;
+	*copy = map;
+	return (1);
+}
+
+void	print_map_array(char **map)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	while (map[i] != NULL)
+	{
+		printf("%zu '", i);
+		j = 0;
+		while (map[i][j] != '\0')
+			printf("%c", map[i][j++]);
+		i++;
+		printf("'\n");
+	}
 }
