@@ -21,15 +21,15 @@ t_vec	get_collide_pos(t_trace tr)
 
 char	get_side(t_trace trace)
 {
-	if (trace.ray.ln_cos > trace.ray.ln_sin)
+	if (trace.ray.ln_cos < trace.ray.ln_sin)
 	{
-		if (trace.rot.sin > 0)
-			return ('W');
-		return ('E');
+		if (trace.rot.cos > 0)
+			return ('E');
+		return ('W');
 	}
-	if (trace.rot.cos > 0)
-		return ('N');
-	return ('S');
+	if (trace.rot.sin > 0)
+		return ('S');
+	return ('N');
 }
 
 t_image	*get_texture(t_graphics *g, char side)
