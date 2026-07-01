@@ -1,7 +1,7 @@
-NO ./scenes/north.xpm
-SO ./scenes/south.xpm
-WE ./scenes/west.xpm
-EA ./scenes/east.xpm
+NO ./scenes/texture/north.xpm
+SO ./scenes/texture/south.xpm
+WE ./scenes/texture/west.xpm
+EA ./scenes/texture/east.xpm
 
 C 102,255,255
 F 64,64,64
@@ -21,4 +21,4 @@ F 64,64,64
 10000000000000001101010010001
 11000001110101011111011110N0111
 11110111 1110101 101111010001
-11111111 1111111 111111111111
+11111111 1111111 111111101111

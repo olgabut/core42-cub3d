@@ -1,7 +1,7 @@
-NO ./scenes/north.xpm
-SO ./scenes/south.xpm
-WE ./scenes/west.xpm
-EA ./scenes/east.xpm
+NO ./scenes/texture/north.xpm
+SO ./scenes/texture/south.xpm
+WE ./scenes/texture/west.xpm
+EA ./scenes/texture/east.xpm
 
 C 102,255,255
 F 64,64,64

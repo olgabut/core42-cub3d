@@ -7,7 +7,8 @@ ifeq ($(MODE),debug)
 	CFLAGS += $(DFLAGS)
 endif
 
-ifdef __APPLE__
+OS := $(shell uname)
+ifeq ($(OS), Darwin)
 # macOS
 MLX_DIR = minilibx_opengl_20191021
 MLX = $(MLX_DIR)/libmlx.a
