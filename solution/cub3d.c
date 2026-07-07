@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:48:26 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/24 11:49:17 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/07 15:06:01 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!init_graphics(&graphics, &scene))
 	{
-		ft_putstr_fd("Error\n", 2);
-		ft_putstr_fd("Failed to initialize graphics\n", 2);
+		free_graphics(&graphics);
 		free_memory_links(&scene.memory);
 		return (1);
 	}
