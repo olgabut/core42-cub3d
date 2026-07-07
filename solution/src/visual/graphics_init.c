@@ -4,16 +4,18 @@ int	load_texture(t_graphics *graphics, t_image *img, const char *path)
 {
 	if (!path)
 	{
-		ft_putstr_fd("Error: texture path is NULL\n", 2);
+		ft_putstr_fd("Error\ntexture path is NULL.\n", 2);
 		return (0);
 	}
-	img->ptr = mlx_xpm_file_to_image(graphics->mlx, (char *)path, &img->width, &img->height);
+	img->ptr = mlx_xpm_file_to_image(graphics->mlx, (char *)path,
+		&img->width, &img->height);
 	if (!img->ptr)
 	{
-		fprintf(stderr, "Error: Failed to load texture %s\n", path);
+		fprintf(stderr, "Error\nFailed to load texture %s.\n", path);
 		return (0);
 	}
-	img->data = mlx_get_data_addr(img->ptr, &img->bpp, &img->size_line, &img->endian);
+	img->data = mlx_get_data_addr(img->ptr, &img->bpp, &img->size_line,
+		&img->endian);
 	return (1);
 }
 
@@ -25,15 +27,26 @@ int	init_graphics(t_graphics *graphics, t_scene *scene)
 	ft_bzero(graphics->door_state, sizeof(graphics->door_state));
 	graphics->mlx = mlx_init();
 	if (!graphics->mlx)
+	{
+		printf("Error\nmlx initialization failed.\n");
 		return (0);
+	}
 	graphics->window = mlx_new_window(graphics->mlx, WINDOW_WIDTH,
 			WINDOW_HEIGHT, "cub3D");
 	if (!graphics->window)
+	{
+		printf("Error\nWindow initialization failed.\n");
 		return (0);
+	}
 	graphics->screen.ptr = mlx_new_image(graphics->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!graphics->screen.ptr)
+	{
+		printf("Error\nImage initialization failed.\n");
 		return (0);
-	graphics->screen.data = mlx_get_data_addr(graphics->screen.ptr, &graphics->screen.bpp, &graphics->screen.size_line, &graphics->screen.endian);
+	}
+	graphics->screen.data = mlx_get_data_addr(graphics->screen.ptr,
+		&graphics->screen.bpp, &graphics->screen.size_line,
+		&graphics->screen.endian);
 	graphics->screen.width = WINDOW_WIDTH;
 	graphics->screen.height = WINDOW_HEIGHT;
 	graphics->scene = scene;
@@ -50,11 +63,8 @@ int	init_graphics(t_graphics *graphics, t_scene *scene)
 	graphics->move_speed = 7.0;
 	graphics->rotate_speed = 0.1;
 	i = 0;
-	while (i < 256)
-	{
-		graphics->keys_pressed[i] = 0;
-		i++;
-	}
+	while (i < 70000)
+		graphics->keys_pressed[i++] = 0;
 	if (!load_texture(graphics, &graphics->north, scene->north.texture))
 		return (0);
 	if (!load_texture(graphics, &graphics->south, scene->south.texture))
@@ -80,5 +90,10 @@ void	free_graphics(t_graphics *graphics)
 		mlx_destroy_image(graphics->mlx, graphics->east.ptr);
 	if (graphics->window)
 		mlx_destroy_window(graphics->mlx, graphics->window);
+	#ifdef __linux__
+		mlx_destroy_display(mlx);
+	#endif
+	if (graphics->mlx)
+		free(graphics->mlx);
 }
 

@@ -2,73 +2,60 @@
 
 /* Ray casting implementation using grid-based DDA algorithm */
 
-int	get_pixel(t_image *img, int x, int y)
+static void	render_wall_column(t_image *img, t_shape shape,
+	int tex_x, t_vec v)
 {
+	int		tex_y;
+	double	o;
+	double	cur;
 	char	*dst;
-
-	if (x < 0 || x >= img->width || y < 0 || y >= img->height)
-		return (0);
-	dst = img->data + (y * img->size_line + x * (img->bpp / 8));
-	return (*(unsigned int *)dst);
-}
-
-void	set_img_strip(t_image *img, t_shape shape, double offset)
-{
-	t_vec		v;
-	int			t;
-	double		o;
-	double		cur;
-	char		*dst;
-	char		*tex_src;
-	int			tex_x;
-
-	if (!shape.img || shape.img->width <= 0 || shape.height <= 0)
-		return ;
-	if (shape.height < 1)
-		return ;
-	if (shape.x < 0 || shape.x >= WINDOW_WIDTH)
-		return ;
-
-	v.y = (int)fmax(0, shape.y);
-	if (v.y >= WINDOW_HEIGHT)
-		return ;
-
-	tex_x = (int)((shape.img->width - 1) * offset);
-	if (tex_x < 0)
-		tex_x = 0;
-	if (tex_x >= shape.img->width)
-		tex_x = shape.img->width - 1;
 
 	o = shape.img->height / (double)shape.height;
 	cur = o * (v.y - shape.y);
 	if (cur < 0)
 		cur = 0;
-
 	dst = img->data + (v.y * img->size_line + shape.x * (img->bpp / 8));
 	while (v.y < shape.y + shape.height && v.y < WINDOW_HEIGHT)
 	{
-		int tex_y = (int)cur;
+		tex_y = (int)cur;
 		if (tex_y >= 0 && tex_y < shape.img->height)
-		{
-			tex_src = shape.img->data + (tex_y * shape.img->size_line + tex_x * (shape.img->bpp / 8));
-			t = *(unsigned int *)tex_src;
-		}
+			*(unsigned int *)dst = *(unsigned int *)(shape.img->data
+					+ (tex_y * shape.img->size_line + tex_x
+						* (shape.img->bpp / 8)));
 		else
-			t = 0;
-		*(unsigned int *)dst = t;
+			*(unsigned int *)dst = 0;
 		dst += img->size_line;
 		cur += o;
 		v.y++;
 	}
 }
 
-void	cast_forward(t_ray_grid *ray, t_ray_grid step)
+static void	set_img_strip(t_image *img, t_shape shape, double offset)
+{
+	t_vec		v;
+	int			tex_x;
+
+	if (!shape.img || shape.img->width <= 0 || shape.height <= 0
+		|| shape.height < 1 || shape.x < 0 || shape.x >= WINDOW_WIDTH)
+		return ;
+	v.y = (int)fmax(0, shape.y);
+	if (v.y >= WINDOW_HEIGHT)
+		return ;
+	tex_x = (int)((shape.img->width - 1) * offset);
+	if (tex_x < 0)
+		tex_x = 0;
+	if (tex_x >= shape.img->width)
+		tex_x = shape.img->width - 1;
+	render_wall_column(img, shape, tex_x, v);
+}
+
+static void	cast_forward(t_ray_grid *ray, t_ray_grid step)
 {
 	if (ray->ln_cos < ray->ln_sin)
 	{
 		ray->st_cos_x += step.st_cos_x;
 		ray->st_cos_y += step.st_cos_y;
-		ray->ln_cos +=step.ln_cos;
+		ray->ln_cos += step.ln_cos;
 	}
 	else
 	{
@@ -78,7 +65,7 @@ void	cast_forward(t_ray_grid *ray, t_ray_grid step)
 	}
 }
 
-void	do_ray(t_graphics *g, t_trace *tr)
+static void	do_ray(t_graphics *g, t_trace *tr)
 {
 	tr->pos = get_collide_pos(*tr);
 	if (is_wall(g, tr->pos.x, tr->pos.y))
@@ -89,7 +76,9 @@ void	do_ray(t_graphics *g, t_trace *tr)
 		tr->i = 200;
 		return ;
 	}
-	if (tr->i < 200 && tr->pos.x >= 0 && tr->pos.x < (int)g->scene->map.size_x && tr->pos.y >= 0 && tr->pos.y < (int)g->scene->map.size_y)
+	if (tr->i < 200 && tr->pos.x >= 0
+		&& tr->pos.x < (int)g->scene->map.size_x && tr->pos.y >= 0
+		&& tr->pos.y < (int)g->scene->map.size_y)
 	{
 		cast_forward(&tr->ray, tr->step);
 		tr->i++;
@@ -112,10 +101,8 @@ void	ray_cast(t_graphics *g)
 
 	draw_floor_ceiling(g);
 	fov = (double)WINDOW_HEIGHT / (double)WINDOW_WIDTH;
-
 	player_grid_x = g->player.x / 64.0;
 	player_grid_y = g->player.y / 64.0;
-
 	trace.line.width = 1;
 	trace.line.x = -1;
 	while (++trace.line.x < WINDOW_WIDTH)

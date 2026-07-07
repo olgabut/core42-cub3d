@@ -148,12 +148,10 @@ int			game_loop(t_graphics *graphics);
 int			load_texture(t_graphics *graphics, t_image *img, const char *path);
 int			init_graphics(t_graphics *graphics, t_scene *scene);
 void		free_graphics(t_graphics *graphics);
-// ray.c
-int			get_pixel(t_image *img, int x, int y);
-void		set_img_strip(t_image *img, t_shape shape, double offset);
-void		cast_forward(t_ray_grid *ray, t_ray_grid step);
-void		do_ray(t_graphics *g, t_trace *tr);
+// ray_cast.c
 void		ray_cast(t_graphics *g);
+// get_pixel.c
+int			get_pixel(t_image *img, int x, int y);
 // ray2.c
 t_rot		make_rot(double angle);
 t_ray_grid	get_init_ray(t_rot *rot, double x, double y);

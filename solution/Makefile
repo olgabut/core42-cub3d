@@ -8,18 +8,19 @@ ifeq ($(MODE),debug)
 endif
 
 OS := $(shell uname)
-ifeq ($(OS), Darwin)
+ifeq ($(UNAME), Linux)
+# Linux
+CFLAGS += -D__linux__
+MLX_DIR = minilibx-linux
+MLX = $(MLX_DIR)/libmlx.a
+MLX_FLAGS = -I$(MLX_DIR)
+MLX_LINKS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
+else
 # macOS
 MLX_DIR = minilibx_opengl_20191021
 MLX = $(MLX_DIR)/libmlx.a
 MLX_FLAGS = -I$(MLX_DIR) -DGL_SILENCE_DEPRECATION
 MLX_LINKS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit -lm -lz
-else
-# Linux
-MLX_DIR = minilibx-linux
-MLX = $(MLX_DIR)/libmlx.a
-MLX_FLAGS = -I$(MLX_DIR)
-MLX_LINKS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 endif
 
 
@@ -44,7 +45,8 @@ SRC_FILES = cub3d.c \
 	src/parser/map_arr_manager.c \
 	src/parser/check_map_array.c \
 	src/visual/renderer.c \
-	src/visual/ray.c \
+	src/visual/get_pixel.c \
+	src/visual/ray_cast.c \
 	src/visual/ray2.c \
 	src/visual/texture.c \
 	src/visual/draw_utils.c \
