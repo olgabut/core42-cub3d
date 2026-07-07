@@ -160,11 +160,10 @@ void		render_frame(t_graphics *g);
 double		normalize_angle(double angle);
 // texture.c
 t_vec		get_collide_pos(t_trace tr);
-char		get_side(t_trace trace);
-t_image		*get_texture(t_graphics *g, char side);
 void		setup_line(t_graphics *g, t_trace *tr);
-int			is_wall(t_graphics *g, int x, int y);
 double		tex_offset(t_trace trace);
+// is_wall.c
+int			is_wall(t_graphics *g, int x, int y);
 
 // BONUS
 // events.c

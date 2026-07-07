@@ -19,7 +19,7 @@ t_vec	get_collide_pos(t_trace tr)
 	return (pos);
 }
 
-char	get_side(t_trace trace)
+static char	get_side(t_trace trace)
 {
 	if (trace.ray.ln_cos < trace.ray.ln_sin)
 	{
@@ -32,7 +32,7 @@ char	get_side(t_trace trace)
 	return ('N');
 }
 
-t_image	*get_texture(t_graphics *g, char side)
+static t_image	*get_texture(t_graphics *g, char side)
 {
 	if (side == 'N')
 		return (&(g->north));
@@ -53,25 +53,6 @@ void	setup_line(t_graphics *g, t_trace *tr)
 	tr->line.y = (WINDOW_HEIGHT - tr->line.height) / 2;
 	tr->line.img = get_texture(g, tr->side);
 	tr->offset = tex_offset(*tr);
-}
-
-int	is_wall(t_graphics *g, int x, int y)
-{
-	char	cell;
-
-	if (y < 0 || y >= (int)g->scene->map.size_y ||
-		x < 0 || x >= (int)g->scene->map.size_x)
-		return (1);
-	if (x < 0 || x >= (int)ft_strlen(g->scene->map.map[y]))
-		return (1);
-	cell = g->scene->map.map[y][x];
-	if (cell == '1')
-		return (1);
-	#ifdef BONUS
-	if (cell == '2' && g->door_state[y][x] == 0)
-		return (1);
-	#endif
-	return (0);
 }
 
 double	tex_offset(t_trace trace)
@@ -96,4 +77,3 @@ double	tex_offset(t_trace trace)
 	}
 	return (offset);
 }
-

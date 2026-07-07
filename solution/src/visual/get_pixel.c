@@ -1,4 +1,3 @@
-
 #include "renderer.h"
 
 int	get_pixel(t_image *img, int x, int y)

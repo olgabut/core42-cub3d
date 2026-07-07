@@ -49,6 +49,7 @@ SRC_FILES = cub3d.c \
 	src/visual/ray_cast.c \
 	src/visual/ray2.c \
 	src/visual/texture.c \
+	src/visual/is_wall.c \
 	src/visual/draw_utils.c \
 	src/visual/graphics_init.c \
 	src/visual/events.c
