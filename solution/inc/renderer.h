@@ -170,5 +170,8 @@ int			is_wall(t_graphics *g, int x, int y);
 int			handle_mouse(int x, int y, t_graphics *graphics);
 // minimap.c
 void		draw_minimap(t_graphics *g);
+// minimap2.c
+void		mm_draw_bg(t_image *s);
+void		mm_draw_arrow(t_image *s, int cx, int cy, double angle);
 
 #endif

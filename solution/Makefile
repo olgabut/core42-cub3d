@@ -54,7 +54,8 @@ SRC_FILES = cub3d.c \
 	src/visual/graphics_init.c \
 	src/visual/events.c
 
-BONUS_SRC_FILES = src/visual/minimap.c
+BONUS_SRC_FILES = src/visual/minimap.c \
+	src/visual/minimap2.c
 BONUS_OBJS_FILES = $(BONUS_SRC_FILES:%.c=$(BUILD)/%.o)
 
 OBJS_FILES = $(SRC_FILES:%.c=$(BUILD)/%.o)
