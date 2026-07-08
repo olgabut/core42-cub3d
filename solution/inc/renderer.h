@@ -139,11 +139,14 @@ typedef struct s_graphics
 // draw_utils.c
 void		put_pixel(t_image *image, int x, int y, int color);
 void		draw_floor_ceiling(t_graphics *g);
+// event_game_loop.c
+double		move_player_x(t_graphics *graphics);
+double		move_player_y(t_graphics *graphics);
+int			game_loop(t_graphics *graphics);
 // events.c
 int			handle_key_press(int keycode, t_graphics *graphics);
 int			handle_key_release(int keycode, t_graphics *graphics);
 int			handle_close(t_graphics *graphics);
-int			game_loop(t_graphics *graphics);
 // graphics_init.c
 int			load_texture(t_graphics *graphics, t_image *img, const char *path);
 int			init_graphics(t_graphics *graphics, t_scene *scene);
@@ -166,12 +169,17 @@ double		tex_offset(t_trace trace);
 int			is_wall(t_graphics *g, int x, int y);
 
 // BONUS
-// events.c
+// event_bonus.c
 int			handle_mouse(int x, int y, t_graphics *graphics);
+void    	toggle_door(t_graphics *g);
 // minimap.c
 void		draw_minimap(t_graphics *g);
 // minimap2.c
 void		mm_draw_bg(t_image *s);
 void		mm_draw_arrow(t_image *s, int cx, int cy, double angle);
+//is_wall_at.c
+int			is_wall_at(t_graphics *g, double x, double y,
+				double margin);
+void		update_player_bonus(t_graphics *graphics);
 
 #endif
