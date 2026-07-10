@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 11:59:36 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/29 11:49:40 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/08 16:35:09 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 	// t_texture	south;
 	// t_texture	west;
 	// t_texture	east;
+	// t_texture	door; // bonus
 	// t_color		floor;
 	// t_color		ceiling;
 	// t_map		map;
@@ -31,6 +32,9 @@ void	print_scene_struct(t_scene scene)
 	printf("SO = '%s'\n", scene.south.texture);
 	printf("WE = '%s'\n", scene.west.texture);
 	printf("EA = '%s'\n", scene.east.texture);
+	#ifdef BONUS
+	printf("D = '%s'\n", scene.door.texture);
+	#endif
 	printf("ceilind RGB(%d, %d, %d)\n",
 		scene.ceiling.color[0], scene.ceiling.color[1], scene.ceiling.color[2]);
 	printf("floor RGB(%d, %d, %d)\n",
@@ -49,6 +53,9 @@ static void	init_scene(t_scene *scene)
 	scene->south.texture = NULL;
 	scene->west.texture = NULL;
 	scene->east.texture = NULL;
+	#ifdef BONUS
+	scene->door.texture = NULL;
+	#endif
 	scene->ceiling.color[0] = -1;
 	scene->ceiling.color[1] = -1;
 	scene->ceiling.color[2] = -1;

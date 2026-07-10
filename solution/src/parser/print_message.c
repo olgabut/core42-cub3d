@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 10:43:02 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/09 12:34:47 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/08 16:18:15 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ void	print_no_texture(char cardinal_direction)
 		printf("west (WE)");
 	else if (cardinal_direction == 'E')
 		printf("east (EA)");
+	#ifdef BONUS
+	else if (cardinal_direction == 'D')
+		printf("door (D)");
+	#endif
 	printf(".\n");
 }
 

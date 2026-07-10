@@ -133,6 +133,7 @@ typedef struct s_graphics
 	double		move_speed;
 	double		rotate_speed;
 	char		keys_pressed[70000];
+	t_image		door;
 	char		door_state[64][64]; // 0 = closed, 1 = opened
 }	t_graphics;
 

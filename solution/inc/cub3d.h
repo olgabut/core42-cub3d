@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:50:14 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/09 09:51:54 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/08 16:15:07 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ typedef struct s_scene
 	t_texture		south;
 	t_texture		west;
 	t_texture		east;
+	#ifdef BONUS
+	t_texture		door;
+	#endif
 	t_color			floor;
 	t_color			ceiling;
 	t_map			map;

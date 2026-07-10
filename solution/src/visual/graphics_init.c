@@ -86,6 +86,10 @@ int	init_graphics(t_graphics *graphics, t_scene *scene)
 		return (0);
 	if (!load_texture(graphics, &graphics->east, scene->east.texture))
 		return (0);
+	#ifdef BONUS
+	if (!load_texture(graphics, &graphics->door, scene->door.texture))
+		return (0);
+	#endif
 	return (1);
 }
 
@@ -101,6 +105,10 @@ void	free_graphics(t_graphics *graphics)
 		mlx_destroy_image(graphics->mlx, graphics->west.ptr);
 	if (graphics->east.ptr)
 		mlx_destroy_image(graphics->mlx, graphics->east.ptr);
+	#ifdef BONUS
+	if (graphics->door.ptr)
+		mlx_destroy_image(graphics->mlx, graphics->door.ptr);
+	#endif
 	if (graphics->window)
 		mlx_destroy_window(graphics->mlx, graphics->window);
 	if (graphics->mlx)
