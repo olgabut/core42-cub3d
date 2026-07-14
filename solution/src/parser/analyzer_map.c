@@ -26,11 +26,19 @@ int	does_line_contain_only_map_symbols(char *line)
 	i = 0;
 	while (line[i] != '\0')
 	{
+		#ifdef BONUS
+		if (line[i] != 'N' && line[i] != 'S'
+			&& line[i] != 'E' && line[i] != 'W'
+			&& line[i] != ' '
+			&& line[i] != '0' && line[i] != '1' && line[i] != '2')
+			return (0);
+		#else
 		if (line[i] != 'N' && line[i] != 'S'
 			&& line[i] != 'E' && line[i] != 'W'
 			&& line[i] != ' '
 			&& line[i] != '0' && line[i] != '1')
 			return (0);
+		#endif
 		i++;
 	}
 	return (1);

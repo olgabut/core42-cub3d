@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 09:22:30 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/09 11:41:28 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/08 16:33:33 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,10 @@ void	analyse_texture(t_scene *scene, char *line, int line_num)
 		status = save_texture(&(scene->west), trim_path, texture_id, line_num);
 	else if (ft_strncmp(texture_id, "EA", 2) == 0)
 		status = save_texture(&(scene->east), trim_path, texture_id, line_num);
+	#ifdef BONUS
+	else if (line[0] == 'D')
+		status = save_texture(&(scene->door), trim_path, "door", line_num);
+	#endif
 	if (!status)
 		scene->data_status = WRONG;
 }
