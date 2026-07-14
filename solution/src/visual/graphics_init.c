@@ -89,6 +89,8 @@ int	init_graphics(t_graphics *graphics, t_scene *scene)
 	#ifdef BONUS
 	if (!load_texture(graphics, &graphics->door, scene->door.texture))
 		return (0);
+	if (!init_fire_texture(graphics))
+		return (0);
 	#endif
 	return (1);
 }
@@ -108,6 +110,7 @@ void	free_graphics(t_graphics *graphics)
 	#ifdef BONUS
 	if (graphics->door.ptr)
 		mlx_destroy_image(graphics->mlx, graphics->door.ptr);
+	free_fire_img(graphics);
 	#endif
 	if (graphics->window)
 		mlx_destroy_window(graphics->mlx, graphics->window);

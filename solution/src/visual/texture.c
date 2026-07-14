@@ -57,6 +57,8 @@ void	setup_line(t_graphics *g, t_trace *tr)
 	int map_y = (int)hit.y;
 	if (g->scene->map.map[map_y][map_x] == '2')
 		tr->line.img = &(g->door);
+	else if (g->scene->map.map[map_y][map_x] == '3')
+		tr->line.img = &(g->fire);
 	else
 	{
 		if ((tr->side == 'N' && g->scene->map.map[map_y + 1][map_x] == '2')

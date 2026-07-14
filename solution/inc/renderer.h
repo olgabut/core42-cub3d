@@ -135,6 +135,7 @@ typedef struct s_graphics
 	char		keys_pressed[70000];
 	t_image		door;
 	char		door_state[64][64]; // 0 = closed, 1 = opened
+	t_image		fire;
 }	t_graphics;
 
 // draw_utils.c
@@ -182,5 +183,8 @@ void		mm_draw_arrow(t_image *s, int cx, int cy, double angle);
 int			is_wall_at(t_graphics *g, double x, double y,
 				double margin);
 void		update_player_bonus(t_graphics *graphics);
+//fire_init.c
+int			init_fire_texture(t_graphics *graphics);
+void		free_fire_img(t_graphics *graphics);
 
 #endif

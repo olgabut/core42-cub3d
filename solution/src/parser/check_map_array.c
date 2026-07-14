@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 11:14:42 by obutolin          #+#    #+#             */
-/*   Updated: 2026/07/08 14:17:20 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/14 11:37:07 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	flood_fill(char **map, int x, int y)
 	if (map[y][x] == '1')
 		return (1);
 	#ifdef BONUS
-	if (map[y][x] != '0' && map[y][x] != '2')
+	if (map[y][x] != '0' && map[y][x] != '2' && map[y][x] != '3')
 	#else
 	if (map[y][x] != '0')
 	#endif

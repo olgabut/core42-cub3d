@@ -78,6 +78,8 @@ static int	get_tile_color(t_graphics *g, int mx, int my)
 		return (0xc47a2a);
 	if (cell == '2' && g->door_state[my][mx] == 1)
 		return (0x5a3010);
+	if (cell == '3')
+		return (0xdd0000);
 	if (cell == ' ' || cell == '\t' || cell == '\0')
 		return (0x111122);
 	return (0x2d2d44);
