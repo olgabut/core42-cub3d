@@ -135,7 +135,9 @@ typedef struct s_graphics
 	char		keys_pressed[70000];
 	t_image		door;
 	char		door_state[64][64]; // 0 = closed, 1 = opened
-	t_image		fire;
+	t_image		fire_frames[5];
+	int			fire_frame;
+	long		fire_last_time;
 }	t_graphics;
 
 // draw_utils.c
@@ -186,5 +188,9 @@ void		update_player_bonus(t_graphics *graphics);
 //fire_init.c
 int			init_fire_texture(t_graphics *graphics);
 void		free_fire_img(t_graphics *graphics);
+long		get_time_ms(void);
+void	update_fire(t_graphics *g);
+void	draw_fire(t_graphics *g);
+void	draw_sprite(t_graphics *g, t_shape s);
 
 #endif

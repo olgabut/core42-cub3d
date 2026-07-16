@@ -64,6 +64,7 @@ static void	update_player(t_graphics *graphics)
 int	game_loop(t_graphics *graphics)
 {
 	#ifdef BONUS
+	update_fire(graphics);
 	update_player_bonus(graphics);
 	#else
 	update_player(graphics);
