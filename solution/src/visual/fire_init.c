@@ -62,11 +62,14 @@ void	draw_fire(t_graphics *g)
 	double	dx;
 	double	dy;
 	double	dist;
-	double	angle;
 	double	screen_x;
 	int		size;
+	double fov;
+	double forward;
+	double side;
 
 	y = -1;
+	fov = atan2(0.5, (double)WINDOW_HEIGHT / WINDOW_WIDTH);
 	while (++y < (int)g->scene->map.size_y)
 	{
 		x = -1;
@@ -78,24 +81,15 @@ void	draw_fire(t_graphics *g)
 			dx = (x * 64 + 32) - g->player.x;
 			dy = (y * 64 + 32) - g->player.y;
 
-			dist = sqrt(dx * dx + dy * dy);
-			// if (dist < 10)
-			// 	continue;
-			angle = atan2(dy, dx) - g->player.angle;
+			dist = sqrt(dx * dx + dy * dy)/64.0;
+			forward = dx * cos(g->player.angle) + dy * sin(g->player.angle);
+			side = -dx * sin(g->player.angle) + dy * cos(g->player.angle);
+			if (forward <= 0)
+				continue;
+			screen_x = WINDOW_WIDTH / 2 + (side / forward)
+				* (WINDOW_WIDTH / (2 * tan(fov)));
 
-			// нормализация угла
-			while (angle > M_PI)
-				angle -= 2 * M_PI;
-			while (angle < -M_PI)
-				angle += 2 * M_PI;
-
-			// если вне экрана
-			if (fabs(angle) > M_PI / 3)
-				continue ;
-
-			screen_x = (0.5 + angle / (M_PI / 3)) * WINDOW_WIDTH;
-
-			size = (int)(WINDOW_HEIGHT / (dist * 0.02));
+			size = (int)(WINDOW_HEIGHT / (dist * 0.8));
 
 			t_shape shape;
 			shape.x = (int)screen_x - size / 2;
