@@ -8,7 +8,7 @@ ifeq ($(MODE),debug)
 endif
 
 OS := $(shell uname)
-ifeq ($(UNAME), Linux)
+ifeq ($(OS), Linux)
 # Linux
 CFLAGS += -D__linux__
 MLX_DIR = minilibx-linux
@@ -74,19 +74,24 @@ $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR) MODE=$(MODE)
 
 $(MLX):
-	@$(MAKE) -C $(MLX_DIR)
+	@if [ ! -f $(MLX_DIR)/Makefile.gen ]; then \
+		cd $(MLX_DIR) && ./configure; \
+	fi
+	$(MAKE) -C $(MLX_DIR)
 
 $(NAME): $(OBJS_FILES) $(LIBFT) $(MLX)
 	$(CC) $(CFLAGS) $(OBJS_FILES) $(LINKER_FLAGS) $(MLX_LINKS) -o $(NAME)
 
 bonus: CFLAGS += -DBONUS
-bonus: fclean $(OBJS_FILES) $(BONUS_OBJS_FILES) $(LIBFT) $(MLX)
+bonus: $(OBJS_FILES) $(BONUS_OBJS_FILES) $(LIBFT) $(MLX)
 	$(CC) $(CFLAGS) $(OBJS_FILES) $(BONUS_OBJS_FILES) $(LINKER_FLAGS) $(MLX_LINKS) -o $(NAME)
 
 clean:
 	rm -rf $(BUILD)
 	@$(MAKE) -C $(LIBFT_DIR) clean
-	@$(MAKE) -C $(MLX_DIR) clean
+	@if [ -f $(MLX_DIR)/Makefile.gen ]; then \
+	$(MAKE) -C $(MLX_DIR) clean; \
+	fi
 
 fclean: clean
 	rm -f $(NAME)
