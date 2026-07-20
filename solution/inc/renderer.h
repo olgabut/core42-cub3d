@@ -138,6 +138,7 @@ typedef struct s_graphics
 	t_image		fire_frames[5];
 	int			fire_frame;
 	long		fire_last_time;
+	double	wall_dist[WINDOW_WIDTH];
 }	t_graphics;
 
 // draw_utils.c
@@ -191,6 +192,6 @@ void		free_fire_img(t_graphics *graphics);
 long		get_time_ms(void);
 void	update_fire(t_graphics *g);
 void	draw_fire(t_graphics *g);
-void	draw_sprite(t_graphics *g, t_shape s);
+void	draw_sprite(t_graphics *g, t_shape s, double sprite_dist);
 
 #endif

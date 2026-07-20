@@ -98,12 +98,12 @@ void	draw_fire(t_graphics *g)
 			shape.height = size;
 			shape.img = &g->fire_frames[g->fire_frame];
 
-			draw_sprite(g, shape);
+			draw_sprite(g, shape, dist);
 		}
 	}
 }
 
-void	draw_sprite(t_graphics *g, t_shape s)
+void	draw_sprite(t_graphics *g, t_shape s, double sprite_dist)
 {
 	int	x;
 	int	y;
@@ -134,7 +134,15 @@ void	draw_sprite(t_graphics *g, t_shape s)
 
 				// 🔥 ПРОЗРАЧНОСТЬ
 				if ((color & 0x00FFFFFF) != 0)
-					put_pixel(&g->screen, screen_x, screen_y, color);
+				{
+					int column = screen_x;
+				
+					if (column >= 0 && column < WINDOW_WIDTH)
+					{
+						if (sprite_dist < g->wall_dist[column])
+							put_pixel(&g->screen, screen_x, screen_y, color);
+					}
+				}
 			}
 			x++;
 		}
