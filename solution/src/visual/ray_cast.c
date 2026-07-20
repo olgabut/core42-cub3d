@@ -71,6 +71,9 @@ static void	do_ray(t_graphics *g, t_trace *tr)
 	if (is_wall(g, tr->pos.x, tr->pos.y))
 	{
 		setup_line(g, tr);
+		#ifdef BONUS
+		g->wall_dist[tr->line.x] = tr->len;
+		#endif
 		if (tr->line.img)
 			set_img_strip(&g->screen, tr->line, tr->offset);
 		tr->i = 200;

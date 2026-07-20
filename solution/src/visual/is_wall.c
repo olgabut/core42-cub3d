@@ -15,6 +15,8 @@ int	is_wall(t_graphics *g, int x, int y)
 	#ifdef BONUS
 	if (cell == '2' && g->door_state[y][x] == 0)
 		return (1);
+	if (cell == '3')
+		return (0);
 	#endif
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 14:21:21 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/09 11:43:07 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/14 11:29:17 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	does_line_contain_only_map_symbols(char *line)
 		if (line[i] != 'N' && line[i] != 'S'
 			&& line[i] != 'E' && line[i] != 'W'
 			&& line[i] != ' '
-			&& line[i] != '0' && line[i] != '1' && line[i] != '2')
+			&& line[i] != '0' && line[i] != '1'
+			&& line[i] != '2' && line[i] != '3')
 			return (0);
 		#else
 		if (line[i] != 'N' && line[i] != 'S'

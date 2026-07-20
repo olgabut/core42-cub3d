@@ -58,7 +58,8 @@ SRC_FILES = cub3d.c \
 BONUS_SRC_FILES = src/visual/minimap.c \
 	src/visual/minimap2.c \
 	src/visual/is_wall_at.c \
-	src/visual/event_bonus.c
+	src/visual/event_bonus.c \
+	src/visual/fire_init.c
 BONUS_OBJS_FILES = $(BONUS_SRC_FILES:%.c=$(BUILD)/%.o)
 
 OBJS_FILES = $(SRC_FILES:%.c=$(BUILD)/%.o)
