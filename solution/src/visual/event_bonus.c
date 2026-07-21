@@ -2,16 +2,23 @@
 
 int	handle_mouse(int x, int y, t_graphics *graphics)
 {
+	static int	ignore;
 	int	dx;
 	int	center;
 
 	(void)y;
+	if (ignore)
+	{
+		ignore = 0;
+		return (0);
+	}
 	center = WINDOW_WIDTH / 2;
 	if (x == center)
 		return (0);
 	dx = x - center;
 	graphics->player.angle += (double)dx * 0.003;
-	mlx_mouse_move(graphics->window, center, WINDOW_HEIGHT / 2);
+	mlx_mouse_move(graphics->mlx,
+		graphics->window, center, WINDOW_HEIGHT / 2);
 	return (0);
 }
 

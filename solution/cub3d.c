@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:48:26 by obutolin          #+#    #+#             */
-/*   Updated: 2026/07/20 18:47:49 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/21 10:28:57 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv)
 	mlx_hook(graphics.window, 17, 1L << 17, handle_close, &graphics);
 	#ifdef BONUS
 	mlx_hook(graphics.window, 6, 1L << 6, handle_mouse, &graphics);
-	mlx_mouse_hide();
+	mlx_mouse_hide(graphics.mlx, graphics.window);
 	#endif
 	mlx_loop_hook(graphics.mlx, game_loop, &graphics);
 	mlx_loop(graphics.mlx);

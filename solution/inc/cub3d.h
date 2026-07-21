@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:50:14 by obutolin          #+#    #+#             */
-/*   Updated: 2026/07/08 16:15:07 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/20 19:04:18 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 # define CUB3D_H
 
 # include "libft/libft.h"
-// # include "minilibx-linux/mlx.h"
+# include "minilibx-linux/mlx.h"
 # include <errno.h>
 # include <stdio.h>
 # include <stdbool.h>
 # include <math.h>
-# include "minilibx_opengl_20191021/mlx.h"
+// # include "minilibx_opengl_20191021/mlx.h"
 # include <stdlib.h>
 
 typedef struct s_color
