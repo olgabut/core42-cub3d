@@ -1,0 +1,3 @@
+	@if [ ! -f $(MLX_DIR)/Makefile.gen ]; then \
+		cd $(MLX_DIR) && ./configure; \
+	fi

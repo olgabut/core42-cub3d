@@ -52,14 +52,17 @@ SRC_FILES = cub3d.c \
 	src/visual/is_wall.c \
 	src/visual/draw_utils.c \
 	src/visual/graphics_init.c \
+	src/visual/free_graphics.c \
 	src/visual/event_game_loop.c \
 	src/visual/events.c
 
-BONUS_SRC_FILES = src/visual/minimap.c \
-	src/visual/minimap2.c \
-	src/visual/is_wall_at.c \
-	src/visual/event_bonus.c \
-	src/visual/fire_init.c
+BONUS_SRC_FILES = src/bonus/minimap_bonus.c \
+	src/bonus/minimap2_bonus.c \
+	src/bonus/is_wall_at_bonus.c \
+	src/bonus/event_bonus.c \
+	src/bonus/fire_init_bonus.c \
+	src/bonus/fire_draw_bonus.c \
+	src/bonus/texture_bonus.c
 BONUS_OBJS_FILES = $(BONUS_SRC_FILES:%.c=$(BUILD)/%.o)
 
 OBJS_FILES = $(SRC_FILES:%.c=$(BUILD)/%.o)
@@ -74,13 +77,10 @@ $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR) MODE=$(MODE)
 
 $(MLX):
-	@if [ ! -f $(MLX_DIR)/Makefile.gen ]; then \
-		cd $(MLX_DIR) && ./configure; \
-	fi
 	$(MAKE) -C $(MLX_DIR)
 
-$(NAME): $(OBJS_FILES) $(LIBFT) $(MLX)
-	$(CC) $(CFLAGS) $(OBJS_FILES) $(LINKER_FLAGS) $(MLX_LINKS) -o $(NAME)
+$(NAME): $(OBJS_FILES) $(BONUS_OBJS_FILES) $(LIBFT) $(MLX)
+	$(CC) $(CFLAGS) $(OBJS_FILES) $(BONUS_OBJS_FILES) $(LINKER_FLAGS) $(MLX_LINKS) -o $(NAME)
 
 bonus: CFLAGS += -DBONUS
 bonus: $(OBJS_FILES) $(BONUS_OBJS_FILES) $(LIBFT) $(MLX)

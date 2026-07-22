@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 10:35:37 by obutolin          #+#    #+#             */
-/*   Updated: 2026/07/08 16:17:27 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/21 12:13:32 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ int	check_struct_from_file(t_scene *scene)
 		return (print_no_texture('W'), 0);
 	if (scene->east.texture == NULL)
 		return (print_no_texture('E'), 0);
-	#ifdef BONUS
-	if (scene->door.texture == NULL)
+	if (BONUS_MODE && scene->door.texture == NULL)
 		return (print_no_texture('D'), 0);
-	#endif
 	if (scene->ceiling.color[0] == -1)
 	{
 		print_file_content_warning(NO_COLOR, -1, "ceiling");

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   event_game_loop.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/21 12:03:11 by vivantso          #+#    #+#             */
+/*   Updated: 2026/07/21 14:41:45 by obutolin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "renderer.h"
 
 double	move_player_x(t_graphics *graphics)
@@ -30,8 +42,6 @@ double	move_player_y(t_graphics *graphics)
 	return (0);
 }
 
-#ifdef BONUS
-#else
 /* Updates player position and rotation based on key presses */
 static void	update_player(t_graphics *graphics)
 {
@@ -58,17 +68,17 @@ static void	update_player(t_graphics *graphics)
 	if (graphics->keys_pressed[KEY_RIGHT])
 		graphics->player.angle += graphics->rotate_speed;
 }
-#endif
 
 /* Main game loop */
 int	game_loop(t_graphics *graphics)
 {
-	#ifdef BONUS
-	update_fire(graphics);
-	update_player_bonus(graphics);
-	#else
-	update_player(graphics);
-	#endif
+	if (BONUS_MODE)
+	{
+		update_fire(graphics);
+		update_player_bonus(graphics);
+	}
+	else
+		update_player(graphics);
 	render_frame(graphics);
 	return (0);
 }

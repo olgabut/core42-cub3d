@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:50:14 by obutolin          #+#    #+#             */
-/*   Updated: 2026/07/20 19:04:18 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/21 14:31:01 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,23 @@
 # define CUB3D_H
 
 # include "libft/libft.h"
-# include "minilibx-linux/mlx.h"
 # include <errno.h>
 # include <stdio.h>
 # include <stdbool.h>
 # include <math.h>
-// # include "minilibx_opengl_20191021/mlx.h"
 # include <stdlib.h>
+
+# ifdef __APPLE__
+#  include "minilibx_opengl_20191021/mlx.h"
+# else
+#  include "minilibx-linux/mlx.h"
+# endif
+
+# ifdef BONUS
+#  define BONUS_MODE 1
+# else
+#  define BONUS_MODE 0
+# endif
 
 typedef struct s_color
 {
@@ -67,9 +77,7 @@ typedef struct s_scene
 	t_texture		south;
 	t_texture		west;
 	t_texture		east;
-	#ifdef BONUS
 	t_texture		door;
-	#endif
 	t_color			floor;
 	t_color			ceiling;
 	t_map			map;

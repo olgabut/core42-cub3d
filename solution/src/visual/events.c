@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/21 12:03:11 by vivantso          #+#    #+#             */
+/*   Updated: 2026/07/21 14:08:45 by obutolin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "renderer.h"
 
 int	handle_key_press(int keycode, t_graphics *graphics)
@@ -7,10 +19,8 @@ int	handle_key_press(int keycode, t_graphics *graphics)
 		mlx_destroy_window(graphics->mlx, graphics->window);
 		exit(0);
 	}
-	#ifdef BONUS
-	if (keycode == KEY_F)
+	if (BONUS_MODE && keycode == KEY_F)
 		toggle_door(graphics);
-	#endif
 	if (keycode >= 0 && keycode < 70000)
 		graphics->keys_pressed[keycode] = 1;
 	return (0);
