@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 10:43:02 by obutolin          #+#    #+#             */
-/*   Updated: 2026/07/21 12:32:47 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/23 10:39:05 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 
 void	print_no_texture(char cardinal_direction)
 {
-	printf("Error\nNo texture specified for ");
+	ft_putstr_fd(STDERR_FILENO, "Error\nNo texture specified for ");
 	if (cardinal_direction == 'N')
-		printf("north (NO)");
+		ft_putstr_fd(STDERR_FILENO, "north (NO)");
 	else if (cardinal_direction == 'S')
-		printf("south (SO)");
+		ft_putstr_fd(STDERR_FILENO, "south (SO)");
 	else if (cardinal_direction == 'W')
-		printf("west (WE)");
+		ft_putstr_fd(STDERR_FILENO, "west (WE)");
 	else if (cardinal_direction == 'E')
-		printf("east (EA)");
+		ft_putstr_fd(STDERR_FILENO, "east (EA)");
 	else if (BONUS_MODE && cardinal_direction == 'D')
-		printf("door (D)");
-	printf(".\n");
+		ft_putstr_fd(STDERR_FILENO, "door (D)");
+	ft_putstr_fd(STDERR_FILENO, ".\n");
 }
 
 void	print_common_error(enum e_error error)
@@ -37,7 +37,7 @@ void	print_common_error(enum e_error error)
 	else if (error == TOO_MANY_ARGUMENTS)
 		printf("Too many arguments. Please provide one argument: file path");
 	else if (error == INVALID_FILE_EXTENTION)
-		printf("Invalid file extension. The file must have '.cub' extension");
+		ft_putstr_fd(2, "Invalid file extension. The file must have '.cub' extension");
 	else if (error == FILE_NOT_FOUND)
 		printf("The file not found. Provide a path to an existing file");
 	else if (error == MEMORY_ERROR)

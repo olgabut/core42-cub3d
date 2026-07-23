@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 12:03:11 by vivantso          #+#    #+#             */
-/*   Updated: 2026/07/22 10:58:50 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/23 10:15:19 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	handle_mouse(int x, int y, t_graphics *graphics)
 		return (0);
 	dx = x - center;
 	graphics->player.angle += (double)dx * 0.003;
-	// mlx_mouse_move(graphics->mlx,
-	// 	graphics->window, center, WINDOW_HEIGHT / 2); // Linux
-	mlx_mouse_move(graphics->window, center, WINDOW_HEIGHT / 2); // MacOS
+	mlx_mouse_move(graphics->mlx,
+		graphics->window, center, WINDOW_HEIGHT / 2); // Linux
+	// mlx_mouse_move(graphics->window, center, WINDOW_HEIGHT / 2); // MacOS
 	return (0);
 }
 

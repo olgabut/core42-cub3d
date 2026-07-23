@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 12:03:11 by vivantso          #+#    #+#             */
-/*   Updated: 2026/07/21 14:16:34 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/23 10:36:12 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	load_texture(t_graphics *graphics, t_image *img, const char *path)
 {
 	if (!path)
 	{
-		ft_putstr_fd("Error\ntexture path is NULL.\n", 2);
+		ft_putstr_fd(2, "Error\ntexture path is NULL.\n");
 		return (0);
 	}
 	img->ptr = mlx_xpm_file_to_image(graphics->mlx, (char *)path,
