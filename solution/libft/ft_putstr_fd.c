@@ -6,13 +6,13 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 12:03:11 by vivantso          #+#    #+#             */
-/*   Updated: 2026/07/23 10:43:53 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/23 11:15:13 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(int fd, char *s)
+void	ft_putstr_fd(char *s, int fd)
 {
 	if (!s)
 		return ;

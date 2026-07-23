@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 12:03:11 by vivantso          #+#    #+#             */
-/*   Updated: 2026/07/23 10:36:12 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/23 11:26:13 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ int	load_texture(t_graphics *graphics, t_image *img, const char *path)
 {
 	if (!path)
 	{
-		ft_putstr_fd(2, "Error\ntexture path is NULL.\n");
+		ft_putstr_fd("Error\ntexture path is NULL.\n", STDERR_FILENO);
 		return (0);
 	}
 	img->ptr = mlx_xpm_file_to_image(graphics->mlx, (char *)path,
 			&img->width, &img->height);
 	if (!img->ptr)
 	{
-		fprintf(stderr, "Error\nFailed to load texture %s.\n", path);
+		ft_fprintf(STDERR_FILENO, "Error\nFailed to load texture %s.\n", path);
 		return (0);
 	}
 	img->data = mlx_get_data_addr(img->ptr, &img->bpp, &img->size_line,
@@ -56,21 +56,21 @@ static int	graphics_preparation(t_graphics *gr)
 	gr->mlx = mlx_init();
 	if (!gr->mlx)
 	{
-		printf("Error\nmlx initialization failed.\n");
+		ft_putstr_fd("Error\nmlx initialization failed.\n", STDERR_FILENO);
 		return (0);
 	}
 	gr->window = mlx_new_window(gr->mlx,
 			WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
 	if (!gr->window)
 	{
-		printf("Error\nWindow initialization failed.\n");
+		ft_putstr_fd("Error\nWindow initialization failed.\n", STDERR_FILENO);
 		return (0);
 	}
 	gr->screen.ptr = mlx_new_image(gr->mlx,
 			WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!gr->screen.ptr)
 	{
-		printf("Error\nImage initialization failed.\n");
+		ft_putstr_fd("Error\nImage initialization failed.\n", STDERR_FILENO);
 		return (0);
 	}
 	gr->screen.data = mlx_get_data_addr(gr->screen.ptr, &gr->screen.bpp,

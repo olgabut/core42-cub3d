@@ -8,7 +8,8 @@ MY_SOURCES = ft_isalpha.c	ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft
 			 ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 			 ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c \
 			 ft_strtoint.c ft_strtrim_changed.c \
-			 get_next_line.c memory_manager.c
+			 get_next_line.c memory_manager.c \
+			 ft_printf.c ft_printf_utils.c
 
 MY_OBJECTS = $(MY_SOURCES:.c=.o)
 AR = ar rcs

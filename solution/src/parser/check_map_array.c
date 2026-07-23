@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 11:14:42 by obutolin          #+#    #+#             */
-/*   Updated: 2026/07/21 14:51:19 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/23 11:42:08 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 
 static void	print_unresolved_charecters(int x, int y)
 {
-	printf("Error\nThere are unresolved cherecters on the map (%d, %d).\n",
+	ft_fprintf(STDERR_FILENO,
+		"Error\nThere are unresolved cherecters on the map (%d, %d).\n",
 		x, y);
 }
 
@@ -24,13 +25,14 @@ static int	flood_fill(char **map, int x, int y)
 {
 	if (!map[y] || !map[y][x])
 	{
-		printf("Error\nThe game space is not enclosed (%d, %d).\n", x, y);
+		ft_fprintf(STDERR_FILENO,
+			"Error\nThe game space is not enclosed (%d, %d).\n", x, y);
 		return (0);
 	}
 	if (map[y][x] == '1')
 		return (1);
- 	if (BONUS_MODE && map[y][x] != '0' && map[y][x] != '2' && map[y][x] != '3')
-			return (print_unresolved_charecters(x, y), 0);
+	if (BONUS_MODE && map[y][x] != '0' && map[y][x] != '2' && map[y][x] != '3')
+		return (print_unresolved_charecters(x, y), 0);
 	else if (!BONUS_MODE && map[y][x] != '0')
 		return (print_unresolved_charecters(x, y), 0);
 	map[y][x] = '1';
@@ -78,7 +80,8 @@ static int	check_doors(char **map, int x, int y)
 			&& (map[y][x + 1] == '0' || map[y][x + 1] == '7')
 			&& map[y - 1][x] == '1' && map[y + 1][x] == '1')))
 	{
-		printf("Error\nInvalid door position (%d, %d).\n", x, y);
+		ft_fprintf(STDERR_FILENO,
+			"Error\nInvalid door position (%d, %d).\n", x, y);
 		return (0);
 	}
 	map[y][x] = '7';

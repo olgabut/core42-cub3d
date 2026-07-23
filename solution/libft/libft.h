@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 12:03:11 by vivantso          #+#    #+#             */
-/*   Updated: 2026/07/23 10:51:49 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/23 11:16:07 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
-void	ft_putchar_fd(int fd, char c);
-void	ft_putstr_fd(int fd, char *s);
-void	ft_putendl_fd(int fd, char *s);
-void	ft_putnbr_fd(int fd, int n);
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putendl_fd(char *s, int fd);
+void	ft_putnbr_fd(int n, int fd);
 int		ft_strtoint(int *ptr_num, char *str);
 char	*ft_strtrim_changed(char *str);
 
@@ -79,6 +79,17 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 # define BUFFER_SIZE 4
 
 char	*get_next_line(int fd);
+
+// ft_printf_utils.c
+int		s_handle(char *s, int fd);
+int		u_handle(unsigned int u, int fd);
+int		i_handle(int n, int fd);
+int		x_handle(unsigned long x, char *base, int fd);
+int		p_handle(void *p, int fd);
+
+// ft_printf.c
+int		ft_printf(const char *format, ...);
+int		ft_fprintf(int fd, const char *format, ...);
 
 // memory_manager.c
 typedef t_list	t_memory_info;

@@ -6,14 +6,14 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 09:48:26 by obutolin          #+#    #+#             */
-/*   Updated: 2026/07/23 10:13:38 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/23 11:39:27 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "renderer.h"
 
-static void visual_init_bonus(t_graphics *graphics)
+static void	visual_init_bonus(t_graphics *graphics)
 {
 	mlx_hook(graphics->window, 6, 1L << 6, handle_mouse, graphics);
 	// mlx_mouse_hide(); // MacOS
