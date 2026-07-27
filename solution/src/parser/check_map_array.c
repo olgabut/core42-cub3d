@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 11:14:42 by obutolin          #+#    #+#             */
-/*   Updated: 2026/07/23 11:42:08 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/27 14:37:49 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,16 @@ static int	check_doors(char **map, int x, int y)
 	if (map[y][x] == '1' || map[y][x] == '7')
 		return (1);
 	if (map[y][x] == '2'
-		&& !(((map[y - 1][x] == '0' || map[y - 1][x] == '7')
-			&& (map[y + 1][x] == '0' || map[y + 1][x] == '7')
+			&& !(((map[y - 1][x] == '0' || map[y - 1][x] == '7'
+					|| map[y - 1][x] == '3')
+			&& (map[y + 1][x] == '0' || map[y + 1][x] == '7'
+				|| map[y + 1][x] == '3')
 			&& map[y][x - 1] == '1' && map[y][x + 1] == '1')
 		||
-		((map[y][x - 1] == '0' || map[y][x - 1] == '7')
-			&& (map[y][x + 1] == '0' || map[y][x + 1] == '7')
+			((map[y][x - 1] == '0' || map[y][x - 1] == '7'
+				|| map[y][x - 1] == '3')
+			&& (map[y][x + 1] == '0' || map[y][x + 1] == '7'
+				|| map[y][x + 1] == '3')
 			&& map[y - 1][x] == '1' && map[y + 1][x] == '1')))
 	{
 		ft_fprintf(STDERR_FILENO,
@@ -85,13 +89,8 @@ static int	check_doors(char **map, int x, int y)
 		return (0);
 	}
 	map[y][x] = '7';
-	if (!check_doors(map, x + 1, y))
-		return (0);
-	if (!check_doors(map, x - 1, y))
-		return (0);
-	if (!check_doors(map, x, y + 1))
-		return (0);
-	if (!check_doors(map, x, y - 1))
+	if (!check_doors(map, x + 1, y) || !check_doors(map, x - 1, y)
+		|| !check_doors(map, x, y + 1) || !check_doors(map, x, y - 1))
 		return (0);
 	return (1);
 }
@@ -118,6 +117,7 @@ int	check_map_array(t_scene *scene)
 	if (BONUS_MODE)
 	{
 		rewrite_map(&copy, scene->map);
+		copy[scene->map.player_position_y][scene->map.player_position_x] = '0';
 		if (!check_doors(copy,
 				scene->map.player_position_x, scene->map.player_position_y))
 			return (0);
