@@ -1,5 +1,12 @@
+C 255, 0,  0
+F     0,255, 0
 WE ./scenes/texture/minecraft-acaciaplanks.xpm
 NO ./scenes/texture/minecraft-blue-planks.xpm
 SO ./scenes/texture/minecraft-ironore.xpm
-SO ./scenes/texture/minecraft-ironore1.xpm
 EA ./scenes/texture/minecraft-crimson.xpm
+
+
+1111
+00W1
+1101
+1111
