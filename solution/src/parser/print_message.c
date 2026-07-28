@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 10:43:02 by obutolin          #+#    #+#             */
-/*   Updated: 2026/07/23 11:21:22 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/28 12:20:53 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	print_file_content_warning(enum e_file_content_warning warning,
 	{
 		ft_fprintf(STDERR_FILENO, "No color information for the %s. ", spec);
 		ft_fprintf(STDERR_FILENO,
-			"The %s will be white (default value).", spec);
+			"The %s will be white (default value)", spec);
 	}
 	ft_putstr_fd(".\n", STDERR_FILENO);
 }

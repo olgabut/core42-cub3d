@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 11:14:42 by obutolin          #+#    #+#             */
-/*   Updated: 2026/07/27 14:37:49 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/28 12:20:22 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static int	flood_fill(char **map, int x, int y)
 {
 	if (!map[y] || !map[y][x])
 	{
-		ft_fprintf(STDERR_FILENO,
-			"Error\nThe game space is not enclosed (%d, %d).\n", x, y);
+		ft_putstr_fd("Error\nThe game space on the map is not enclosed.\n",
+			STDERR_FILENO);
 		return (0);
 	}
 	if (map[y][x] == '1')
