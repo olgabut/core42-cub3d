@@ -71,10 +71,11 @@ docker run \
 -e DISPLAY=host.docker.internal:0 \
 cub3d-dev \
 scenes/minimal_scene.cub
+
 ```
 
 Бонус сцена
-```
+```bash
 docker run \
 -it \
 --rm \
@@ -91,6 +92,11 @@ docker run -it --rm \
 -e DISPLAY=host.docker.internal:0 \
 --entrypoint bash \
 cub3d-dev
+
+#install valgrind
+apt update
+apt install valgrind
+valgrind --version
 ```
 внутри нормально делаем пересборку и запуск проекта
 ```

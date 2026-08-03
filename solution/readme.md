@@ -269,6 +269,13 @@ After compilation, run the program by providing the path to a valid .cub configu
 
 #Example bonus part:
 ./cub3d scenes/bonus_fire.cub
+
+#Check leaks
+valgrind \
+--leak-check=full \
+--show-leak-kinds=all \
+--suppressions=valgrind_mlx.supp \
+./cub3d scenes/minimal_scene.cub
 ```
 
 ## Cleaning

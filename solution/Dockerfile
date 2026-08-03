@@ -13,6 +13,7 @@ RUN apt update && apt install -y \
     libbsd-dev \
     libreadline-dev \
     git \
+    valgrind \
     && rm -rf /var/lib/apt/lists/*
 
 COPY minilibx-linux ./minilibx-linux
@@ -25,4 +26,4 @@ COPY . .
 
 RUN make bonus
 
-ENTRYPOINT ["./cub3d"]
+ENTRYPOINT ["./cub3D"]
