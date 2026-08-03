@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 12:03:11 by vivantso          #+#    #+#             */
-/*   Updated: 2026/07/27 14:39:35 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/08/03 16:24:21 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	free_graphics(t_graphics *graphics)
 {
+	if (!graphics || !graphics->mlx)
+		return ;
 	if (graphics->screen.ptr)
 		mlx_destroy_image(graphics->mlx, graphics->screen.ptr);
 	if (graphics->north.ptr)
@@ -32,9 +34,7 @@ void	free_graphics(t_graphics *graphics)
 	}
 	if (graphics->window)
 		mlx_destroy_window(graphics->mlx, graphics->window);
-	if (graphics->mlx)
-	{
-		mlx_destroy_display(graphics->mlx); // Linux
-		free(graphics->mlx);
-	}
+	mlx_destroy_display(graphics->mlx); // Linux
+	free(graphics->mlx);
+	graphics->mlx = NULL;
 }
