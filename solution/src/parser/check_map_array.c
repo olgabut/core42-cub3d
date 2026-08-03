@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 11:14:42 by obutolin          #+#    #+#             */
-/*   Updated: 2026/07/28 12:20:22 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/08/03 14:41:11 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ static void	print_unresolved_charecters(int x, int y)
 		x, y);
 }
 
-static int	flood_fill(char **map, int x, int y)
+static int	flood_fill(char **map, int x, int y, t_scene *scene)
 {
-	if (!map[y] || !map[y][x])
+	if ( x < 0 || x >= (int)scene->map.size_x
+		|| y < 0 || y >= (int)scene->map.size_y
+		|| !map[y] || !map[y][x])
 	{
 		ft_putstr_fd("Error\nThe game space on the map is not enclosed.\n",
 			STDERR_FILENO);
@@ -36,13 +38,13 @@ static int	flood_fill(char **map, int x, int y)
 	else if (!BONUS_MODE && map[y][x] != '0')
 		return (print_unresolved_charecters(x, y), 0);
 	map[y][x] = '1';
-	if (!flood_fill(map, x + 1, y))
+	if (!flood_fill(map, x + 1, y, scene))
 		return (0);
-	if (!flood_fill(map, x - 1, y))
+	if (!flood_fill(map, x - 1, y, scene))
 		return (0);
-	if (!flood_fill(map, x, y + 1))
+	if (!flood_fill(map, x, y + 1, scene))
 		return (0);
-	if (!flood_fill(map, x, y - 1))
+	if (!flood_fill(map, x, y - 1, scene))
 		return (0);
 	return (1);
 }
@@ -112,7 +114,9 @@ int	check_map_array(t_scene *scene)
 	}
 	copy[scene->map.player_position_y][scene->map.player_position_x] = '0';
 	if (!flood_fill(copy,
-			scene->map.player_position_x, scene->map.player_position_y))
+			scene->map.player_position_x,
+			scene->map.player_position_y,
+			scene))
 		return (0);
 	if (BONUS_MODE)
 	{
