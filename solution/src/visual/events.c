@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 12:03:11 by vivantso          #+#    #+#             */
-/*   Updated: 2026/07/21 14:08:45 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/08/03 14:19:01 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	handle_key_press(int keycode, t_graphics *graphics)
 	if (keycode == KEY_ESC)
 	{
 		mlx_destroy_window(graphics->mlx, graphics->window);
+		free_memory_links(&graphics->scene->memory);
 		exit(0);
 	}
 	if (BONUS_MODE && keycode == KEY_F)
@@ -36,6 +37,7 @@ int	handle_key_release(int keycode, t_graphics *graphics)
 int	handle_close(t_graphics *graphics)
 {
 	mlx_destroy_window(graphics->mlx, graphics->window);
+	free_memory_links(&graphics->scene->memory);
 	exit(0);
 	return (0);
 }
