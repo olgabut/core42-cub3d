@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_cast.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/21 12:03:11 by vivantso          #+#    #+#             */
+/*   Updated: 2026/07/21 13:55:25 by obutolin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "renderer.h"
 
 /* Ray casting implementation using grid-based DDA algorithm */
@@ -71,9 +83,8 @@ static void	do_ray(t_graphics *g, t_trace *tr)
 	if (is_wall(g, tr->pos.x, tr->pos.y))
 	{
 		setup_line(g, tr);
-		#ifdef BONUS
-		g->wall_dist[tr->line.x] = tr->len;
-		#endif
+		if (BONUS_MODE)
+			g->wall_dist[tr->line.x] = tr->len;
 		if (tr->line.img)
 			set_img_strip(&g->screen, tr->line, tr->offset);
 		tr->i = 200;

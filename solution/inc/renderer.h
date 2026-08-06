@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   renderer.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/20 09:50:14 by vivantso          #+#    #+#             */
+/*   Updated: 2026/07/22 11:00:38 by obutolin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RENDERER_H
 # define RENDERER_H
 
@@ -9,29 +21,29 @@
 # define FOV			60
 
 # ifdef __APPLE__
-/* macOS key codes */
-# define KEY_W			13
-# define KEY_A			0
-# define KEY_S			1
-# define KEY_D			2
-# define KEY_UP			126
-# define KEY_DOWN		125
-# define KEY_LEFT		123
-# define KEY_RIGHT		124
-# define KEY_ESC		53
-# define KEY_F			3
+// macOS key codes
+#  define KEY_W			13
+#  define KEY_A			0
+#  define KEY_S			1
+#  define KEY_D			2
+#  define KEY_UP		126
+#  define KEY_DOWN		125
+#  define KEY_LEFT		123
+#  define KEY_RIGHT		124
+#  define KEY_ESC		53
+#  define KEY_F			3
 # else
-/* linux key codes */
-# define KEY_W			119
-# define KEY_A			97
-# define KEY_S			115
-# define KEY_D			100
-# define KEY_UP			65362
-# define KEY_DOWN		65364
-# define KEY_LEFT		65361
-# define KEY_RIGHT		65363
-# define KEY_ESC		65307
-# define KEY_F			102
+// linux key codes
+#  define KEY_W			119
+#  define KEY_A			97
+#  define KEY_S			115
+#  define KEY_D			100
+#  define KEY_UP			65362
+#  define KEY_DOWN		65364
+#  define KEY_LEFT		65361
+#  define KEY_RIGHT		65363
+#  define KEY_ESC		65307
+#  define KEY_F			102
 # endif
 
 /* minimap params */
@@ -138,7 +150,7 @@ typedef struct s_graphics
 	t_image		fire_frames[5];
 	int			fire_frame;
 	long		fire_last_time;
-	double	wall_dist[WINDOW_WIDTH];
+	double		wall_dist[WINDOW_WIDTH];
 }	t_graphics;
 
 // draw_utils.c
@@ -155,6 +167,7 @@ int			handle_close(t_graphics *graphics);
 // graphics_init.c
 int			load_texture(t_graphics *graphics, t_image *img, const char *path);
 int			init_graphics(t_graphics *graphics, t_scene *scene);
+// free_graphics.c
 void		free_graphics(t_graphics *graphics);
 // ray_cast.c
 void		ray_cast(t_graphics *g);
@@ -170,28 +183,29 @@ double		normalize_angle(double angle);
 t_vec		get_collide_pos(t_trace tr);
 void		setup_line(t_graphics *g, t_trace *tr);
 double		tex_offset(t_trace trace);
+t_image		*get_texture(t_graphics *g, char side);
 // is_wall.c
 int			is_wall(t_graphics *g, int x, int y);
 
 // BONUS
 // event_bonus.c
 int			handle_mouse(int x, int y, t_graphics *graphics);
-void    	toggle_door(t_graphics *g);
-// minimap.c
+void		toggle_door(t_graphics *g);
+// minimap_bonus.c
 void		draw_minimap(t_graphics *g);
-// minimap2.c
+// minimap2_bonus.c
 void		mm_draw_bg(t_image *s);
 void		mm_draw_arrow(t_image *s, int cx, int cy, double angle);
-//is_wall_at.c
-int			is_wall_at(t_graphics *g, double x, double y,
-				double margin);
+// is_wall_at_bonus.c
+int			is_wall_at(t_graphics *g, double x, double y, double margin);
 void		update_player_bonus(t_graphics *graphics);
-//fire_init.c
+// fire_init_bonus.c
 int			init_fire_texture(t_graphics *graphics);
 void		free_fire_img(t_graphics *graphics);
-long		get_time_ms(void);
-void	update_fire(t_graphics *g);
-void	draw_fire(t_graphics *g);
-void	draw_sprite(t_graphics *g, t_shape s, double sprite_dist);
-
+void		draw_fire(t_graphics *g);
+// fire_draw_bonus.c
+void		update_fire(t_graphics *g);
+void		draw_sprite_fire(t_graphics *g, t_shape s, double sprite_dist);
+// texture_bonus.c
+void		setup_line_bonus(t_graphics *g, t_trace *tr);
 #endif

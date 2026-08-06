@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 10:47:02 by obutolin          #+#    #+#             */
-/*   Updated: 2026/06/29 11:42:07 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/21 12:08:10 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ void	print_file_content_error(enum e_file_content_error error,
 void	print_file_content_warning(enum e_file_content_warning warning,
 			int line_num, char *spec);
 void	print_no_texture(char cardinal_direction);
-int	    check_map_array(t_scene *scene);
+int		check_map_array(t_scene *scene);
 
 #endif

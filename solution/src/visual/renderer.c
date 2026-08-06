@@ -1,12 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   renderer.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/21 12:03:11 by vivantso          #+#    #+#             */
+/*   Updated: 2026/07/21 14:18:19 by obutolin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "renderer.h"
 
 void	render_frame(t_graphics *g)
 {
 	ray_cast(g);
-	#ifdef BONUS
-	draw_fire(g);
-	draw_minimap(g);
-	#endif
+	if (BONUS_MODE)
+	{
+		draw_fire(g);
+		draw_minimap(g);
+	}
 	mlx_put_image_to_window(g->mlx, g->window, g->screen.ptr, 0, 0);
 }
 

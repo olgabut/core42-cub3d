@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/21 12:03:11 by vivantso          #+#    #+#             */
+/*   Updated: 2026/07/23 11:16:07 by obutolin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 
@@ -53,7 +65,6 @@ int		ft_strtoint(int *ptr_num, char *str);
 char	*ft_strtrim_changed(char *str);
 
 // BONUS
-
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);
@@ -66,7 +77,19 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 // get_next_line.c
 # define BUFFER_SIZE 4
-char				*get_next_line(int fd);
+
+char	*get_next_line(int fd);
+
+// ft_printf_utils.c
+int		s_handle(char *s, int fd);
+int		u_handle(unsigned int u, int fd);
+int		i_handle(int n, int fd);
+int		x_handle(unsigned long x, char *base, int fd);
+int		p_handle(void *p, int fd);
+
+// ft_printf.c
+int		ft_printf(const char *format, ...);
+int		ft_fprintf(int fd, const char *format, ...);
 
 // memory_manager.c
 typedef t_list	t_memory_info;

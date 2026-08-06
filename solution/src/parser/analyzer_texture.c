@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 09:22:30 by obutolin          #+#    #+#             */
-/*   Updated: 2026/07/08 16:33:33 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/28 11:22:51 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	analyse_texture(t_scene *scene, char *line, int line_num)
 	texture_id[0] = line[0];
 	texture_id[1] = line[1];
 	texture_id[2] = '\0';
-	if (line[2] != ' ')
+	if (line[2] != ' ' && line[0] != 'D')
 		print_file_content_warning(NO_SPACE, line_num, "");
 	trim_path = ft_strtrim_changed(line + 2);
 	if (!is_texture_value(scene, trim_path, texture_id, line_num))
@@ -68,10 +68,8 @@ void	analyse_texture(t_scene *scene, char *line, int line_num)
 		status = save_texture(&(scene->west), trim_path, texture_id, line_num);
 	else if (ft_strncmp(texture_id, "EA", 2) == 0)
 		status = save_texture(&(scene->east), trim_path, texture_id, line_num);
-	#ifdef BONUS
-	else if (line[0] == 'D')
+	else if (BONUS_MODE && line[0] == 'D')
 		status = save_texture(&(scene->door), trim_path, "door", line_num);
-	#endif
 	if (!status)
 		scene->data_status = WRONG;
 }

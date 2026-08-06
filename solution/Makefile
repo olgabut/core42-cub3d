@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = cub3D
 CC = cc
 MODE ?= debug
 CFLAGS = -Wall -Wextra -Werror
@@ -8,7 +8,7 @@ ifeq ($(MODE),debug)
 endif
 
 OS := $(shell uname)
-ifeq ($(UNAME), Linux)
+ifeq ($(OS), Linux)
 # Linux
 CFLAGS += -D__linux__
 MLX_DIR = minilibx-linux
@@ -52,14 +52,17 @@ SRC_FILES = cub3d.c \
 	src/visual/is_wall.c \
 	src/visual/draw_utils.c \
 	src/visual/graphics_init.c \
+	src/visual/free_graphics.c \
 	src/visual/event_game_loop.c \
 	src/visual/events.c
 
-BONUS_SRC_FILES = src/visual/minimap.c \
-	src/visual/minimap2.c \
-	src/visual/is_wall_at.c \
-	src/visual/event_bonus.c \
-	src/visual/fire_init.c
+BONUS_SRC_FILES = src/bonus/minimap_bonus.c \
+	src/bonus/minimap2_bonus.c \
+	src/bonus/is_wall_at_bonus.c \
+	src/bonus/event_bonus.c \
+	src/bonus/fire_init_bonus.c \
+	src/bonus/fire_draw_bonus.c \
+	src/bonus/texture_bonus.c
 BONUS_OBJS_FILES = $(BONUS_SRC_FILES:%.c=$(BUILD)/%.o)
 
 OBJS_FILES = $(SRC_FILES:%.c=$(BUILD)/%.o)
@@ -74,19 +77,21 @@ $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR) MODE=$(MODE)
 
 $(MLX):
-	@$(MAKE) -C $(MLX_DIR)
+	$(MAKE) -C $(MLX_DIR)
 
-$(NAME): $(OBJS_FILES) $(LIBFT) $(MLX)
-	$(CC) $(CFLAGS) $(OBJS_FILES) $(LINKER_FLAGS) $(MLX_LINKS) -o $(NAME)
+$(NAME): $(OBJS_FILES) $(BONUS_OBJS_FILES) $(LIBFT) $(MLX)
+	$(CC) $(CFLAGS) $(OBJS_FILES) $(BONUS_OBJS_FILES) $(LINKER_FLAGS) $(MLX_LINKS) -o $(NAME)
 
 bonus: CFLAGS += -DBONUS
-bonus: fclean $(OBJS_FILES) $(BONUS_OBJS_FILES) $(LIBFT) $(MLX)
+bonus: $(OBJS_FILES) $(BONUS_OBJS_FILES) $(LIBFT) $(MLX)
 	$(CC) $(CFLAGS) $(OBJS_FILES) $(BONUS_OBJS_FILES) $(LINKER_FLAGS) $(MLX_LINKS) -o $(NAME)
 
 clean:
 	rm -rf $(BUILD)
 	@$(MAKE) -C $(LIBFT_DIR) clean
-	@$(MAKE) -C $(MLX_DIR) clean
+	@if [ -f $(MLX_DIR)/Makefile.gen ]; then \
+	$(MAKE) -C $(MLX_DIR) clean; \
+	fi
 
 fclean: clean
 	rm -f $(NAME)

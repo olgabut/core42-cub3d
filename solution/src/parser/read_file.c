@@ -6,7 +6,7 @@
 /*   By: obutolin <obutolin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 09:25:16 by obutolin          #+#    #+#             */
-/*   Updated: 2026/07/08 16:21:33 by obutolin         ###   ########.fr       */
+/*   Updated: 2026/07/21 12:27:42 by obutolin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,11 @@ static void	analyse_line(t_scene *scene, char *line, int line_num)
 		return ;
 	if (no_spaces_line[0] == 'F' || no_spaces_line[0] == 'C')
 		analyse_color(scene, no_spaces_line, line_num);
-	#ifdef BONUS
 	else if (ft_strncmp(no_spaces_line, "NO", 2) == 0
 		|| ft_strncmp(no_spaces_line, "SO", 2) == 0
 		|| ft_strncmp(no_spaces_line, "WE", 2) == 0
 		|| ft_strncmp(no_spaces_line, "EA", 2) == 0
-		|| no_spaces_line[0] == 'D')
-	#else
-	else if (ft_strncmp(no_spaces_line, "NO", 2) == 0
-		|| ft_strncmp(no_spaces_line, "SO", 2) == 0
-		|| ft_strncmp(no_spaces_line, "WE", 2) == 0
-		|| ft_strncmp(no_spaces_line, "EA", 2) == 0)
-	#endif
+		|| (BONUS_MODE && no_spaces_line[0] == 'D'))
 		analyse_texture(scene, no_spaces_line, line_num);
 	else
 		analyse_map_line(scene, line, line_num);

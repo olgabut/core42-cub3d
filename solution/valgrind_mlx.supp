@@ -1,0 +1,17 @@
+{
+   mlx_xcb_writev
+   Memcheck:Param
+   writev(vector[0])
+   fun:writev
+   obj:/usr/lib/aarch64-linux-gnu/libxcb.so.1.1.0
+   obj:/usr/lib/aarch64-linux-gnu/libxcb.so.1.1.0
+   fun:xcb_writev
+   fun:_XSend
+   fun:_XReadEvents
+   fun:XWindowEvent
+   fun:mlx_int_wait_first_expose
+   fun:mlx_new_window
+   fun:graphics_preparation
+   fun:init_graphics
+   fun:main
+}
